@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# React StarBucks Clone
+## 소개
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**현재 진행중인 프로젝트 입니다.**
 
-## Available Scripts
 
-In the project directory, you can run:
+```
+**2020/12/02, 프로젝트 제작 완료**
+   - main page에서는 한국 인기동영상 리스트를 보여줍니다.
+   - 왼쪽 사이드바는 동작하지 않습니다.
 
-### `yarn start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Window 환경에서 create-react-app 을 사용하여 Youtube 메인, 검색결과, 동영상 시청 페이지를 클론코딩했습니다.
+- Chrome 을 기준으로 개발했기 때문에, 다른 브라우저와 호환이 되지 않을 수 도 있습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `yarn build`
+StarBucks : https://www.starbucks.co.kr/index.do <br>
+My StarBucks Clone : 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 시작하기	
+```
+npm install
+npm run start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ ---
 
-### `yarn eject`
+### 기술 스택 
+**1. HTML5**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**2. CSS3**
+ - Styled-Components 사용 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**3. CRA (create-react-app)**
+(auto installed by CRA)
+- webpack (bundler)
+- babel (trans-compiler)
+- others.. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**4. React Library**
+- **sass** : SCSS를 사용을 위한 라이브러리
+   https://sass-lang.com/documentation/js-api
+   <br>
+- **axios** : youtube API 를 사용을 위한 HTTP 통신 라이브러리
+   https://axios-http.com/kr/docs/intro
+   <br>
+- **react-youtube** : Youtube 동영상을 iframe 으로 반환하여 별도의 커스텀 없이 동영상 플레이어 컴포넌트를 사용.
+   https://www.npmjs.com/package/react-youtube
+   <br>
+- **react-icons** : youtube에서 사용되는 아이콘을 대체할 수 있는 아이콘 제공
+   https://react-icons.github.io/react-icons/ 
+   https://www.npmjs.com/package/react-icons 
+   <br>
+- **react-router-dom v6** : Link, Router, queryString 지원.(페이지 이동 효과를 위해 사용), 이 문서에서는 version 6 를 사용함.
+   https://reactrouter.com/docs/en/v6/getting-started/overview
+   https://reactrouter.com/docs/en/v6/upgrading/v5 (v5와 달라진 점)
+   <br>
+- **gh-pages** github의 호스팅 서비스 이용하기
+   https://www.npmjs.com/package/gh-pages
+   <br>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+### Components Structure
+![bbb drawio](https://user-images.githubusercontent.com/34260967/143530854-28281361-5657-4324-8de8-052ba67ddfb5.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![temp drawio](https://user-images.githubusercontent.com/34260967/143534852-296c94f5-3b6f-4561-b51d-ba20a0a0f26f.png)
+- Header, SideBar 은 fixed 요소임.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### Dependencies
+```javascript
+"dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.24.0",
+    "gh-pages": "^3.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "4.0.3",
+    "react-youtube": "^7.13.1",
+    "sass": "^1.43.4",
+    "web-vitals": "^1.0.1"
+  }
+```
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 동작 원리 및 구현 내용
 
-### Analyzing the Bundle Size
+### 1. 버튼 부가 설명 컴포넌트
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 이번 프로젝트를 하면서..
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 향후 계획
 
-### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
