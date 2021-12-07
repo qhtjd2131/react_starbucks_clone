@@ -1,5 +1,4 @@
-import { string } from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import * as data from "./InnerNavData";
 
@@ -7,29 +6,47 @@ const InnerNavComponent = styled.nav`
   height: 55%;
   width: 100%;
   border: 1px solid black;
-
+  box-sizing: border-box;
   display: flex;
 `;
-const ItemWrapper = styled.ul`
+const InnerNavItemWrapper = styled.ul`
   display: flex;
   justify-content: flex-end;
   width: 100%;
 `;
-const Item = styled.li`
+const InnerNavItem = styled.li`
   cursor: pointer;
+  padding: 12px 18px;
+  padding-bottom: 40px;
   &:hover {
     background-color: gray;
   }
 `;
 
+//// interface
+interface IselectedInnerNavItem {
+  value: string | null;
+}
+
 const InnerNav = () => {
+  const [selectedInnerNavItem, setSelectedInnerNavItem] =
+    useState<IselectedInnerNavItem | null>({ value: null });
+
   return (
     <InnerNavComponent>
-      <ItemWrapper>
-        {Object.keys(data.innerNavItems).map((i, index) => (
-          <Item key={index}>{data.innerNavItems[i].title + " ---- "}</Item>
+      <InnerNavItemWrapper>
+        {Object.keys(data.innerNavItems).map((i: string, index: number) => (
+          <InnerNavItem
+            key={index}
+            onClick={() => {
+              setSelectedInnerNavItem({ value: data.innerNavItems[i].title });
+            }}
+          >
+            {data.innerNavItems[i].title}
+          </InnerNavItem>
         ))}
-      </ItemWrapper>
+ 
+      </InnerNavItemWrapper>
     </InnerNavComponent>
   );
 };

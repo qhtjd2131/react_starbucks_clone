@@ -7,22 +7,22 @@ interface Iitem {
   title: string;
 }
 export const innerNavItems: IinnerNavItems = {
-  item1: {
+  coffee: {
     title: "COFFEE",
   },
-  item2: {
+  menu: {
     title: "MENU",
   },
-  item3: {
+  store: {
     title: "STORE",
   },
-  item4: {
+  responsibility: {
     title: "RESPONSIBILITY",
   },
-  item5: {
+  rewards: {
     title: "STARBUCKS REWARDS",
   },
-  item6: {
+  new: {
     title: "WHAT'S NEW",
   },
 };
