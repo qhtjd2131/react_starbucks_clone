@@ -22,8 +22,12 @@ const UtilNavItemWrapper = styled.ul`
 
 const UtilNavItem = styled.li`
   cursor: pointer;
-  padding: 4px 10px;
+  padding: 4px 14px;
   height: 20px;
+
+  & + & {
+    border-left: solid 1px black;
+  }
 
   &:hover {
     text-decoration: underline;

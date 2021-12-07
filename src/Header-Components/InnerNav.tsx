@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import * as data from "./InnerNavData";
 
+
+//style
 const InnerNavComponent = styled.nav`
   height: 55%;
   width: 100%;
@@ -16,7 +18,7 @@ const InnerNavItemWrapper = styled.ul`
 `;
 const InnerNavItem = styled.li`
   cursor: pointer;
-  padding: 12px 18px;
+  padding: 12px 22px;
   padding-bottom: 40px;
   &:hover {
     color: #669900;
