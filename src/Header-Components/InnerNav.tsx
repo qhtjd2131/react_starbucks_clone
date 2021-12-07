@@ -19,7 +19,8 @@ const InnerNavItem = styled.li`
   padding: 12px 18px;
   padding-bottom: 40px;
   &:hover {
-    background-color: gray;
+    color: #669900;
+    background-color: #2c2a29;
   }
 `;
 
@@ -45,7 +46,6 @@ const InnerNav = () => {
             {data.innerNavItems[i].title}
           </InnerNavItem>
         ))}
- 
       </InnerNavItemWrapper>
     </InnerNavComponent>
   );
