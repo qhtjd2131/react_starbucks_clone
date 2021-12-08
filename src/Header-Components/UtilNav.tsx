@@ -22,11 +22,12 @@ const UtilNavItemWrapper = styled.ul`
 
 const UtilNavItem = styled.li`
   cursor: pointer;
-  padding: 4px 14px;
-  height: 20px;
+  padding: 0px 14px;
+  margin: 4px 0px;
+  height: 16px;
 
   & + & {
-    border-left: solid 1px black;
+    border-left: solid 0.5px gray;
   }
 
   &:hover {
