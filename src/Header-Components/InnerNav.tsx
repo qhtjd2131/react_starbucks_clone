@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import * as data from "./InnerNavData";
-
+import InnerNavDropDown from "./InnerNavDropDown";
 
 //style
 const InnerNavComponent = styled.nav`
@@ -26,6 +26,10 @@ const InnerNavItem = styled.li`
   }
 `;
 
+const DropDownWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+`;
 //// interface
 interface IselectedInnerNavItem {
   value: string | null;
@@ -39,14 +43,20 @@ const InnerNav = () => {
     <InnerNavComponent>
       <InnerNavItemWrapper>
         {Object.keys(data.innerNavItems).map((i: string, index: number) => (
-          <InnerNavItem
-            key={index}
-            onClick={() => {
-              setSelectedInnerNavItem({ value: data.innerNavItems[i].title });
-            }}
-          >
-            {data.innerNavItems[i].title}
-          </InnerNavItem>
+          <>
+            <InnerNavItem
+              key={index}
+              onClick={() => {
+                setSelectedInnerNavItem({ value: data.innerNavItems[i].title });
+              }}
+            >
+              {data.innerNavItems[i].title}
+            </InnerNavItem>
+            {console.log(data.innerNavItems[i].dropdown)}
+            <DropDownWrapper>
+                <InnerNavDropDown  dropdown={data.innerNavItems[i].dropdown} />
+            </DropDownWrapper>
+          </>
         ))}
       </InnerNavItemWrapper>
     </InnerNavComponent>

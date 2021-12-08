@@ -1,6 +1,6 @@
 
 
 
-export const innerNavDropDownItem = {
+export const innerNavDropDownItem_COFFEE = {
 
 }

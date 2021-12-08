@@ -1,36 +1,37 @@
 import React from "react";
 import styled from "styled-components";
+import { Idropdown } from "./InnerNavData";
 import * as data from "./InnerNavDropDownData";
 
+const InnerNavDropDownComponent = styled.div``;
 
-const InnerNavDropDownComponent = styled.div`
+const InnerNavDropDownWrapper = styled.div``;
 
-`;
+const InnerNavDropDownItemWrapper = styled.ul``;
 
-const InnerNavDropDownWrapper = styled.div`
+const InnerNavDropDownItem = styled.li``;
 
-`;
+const InnerNavDropDownItemTitle = styled.label``;
 
-const InnerNavDropDownItemWrapper = styled.ul`
+const InnerNavDropDownItemSubTitle = styled.label``;
 
-`
-
-const InnerNavDropDownItem = styled.li`
-
-`
-
-const InnerNavDropDown = () => {
-  return <InnerNavDropDownComponent> 
+//interface
+interface INavDropdownProps {
+  dropdown: Idropdown[];
+}
+const InnerNavDropDown = ({ dropdown }: INavDropdownProps) => {
+    console.log("111",dropdown);
+  return (
+    <InnerNavDropDownComponent>
       <InnerNavDropDownWrapper>
-          {
-              Object.keys(data.innerNavDropDownItem).map(()=>(
-                  <InnerNavDropDownItemWrapper>
-
-                      </InnerNavDropDownItemWrapper>
-              ))
-          }
+        {dropdown.map((i : any, index: number) => (
+          <InnerNavDropDownItemWrapper
+            key={index}
+          ></InnerNavDropDownItemWrapper>
+        ))}
       </InnerNavDropDownWrapper>
-  </InnerNavDropDownComponent>;
+    </InnerNavDropDownComponent>
+  );
 };
 
 export default InnerNavDropDown;
