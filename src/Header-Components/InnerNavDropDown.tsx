@@ -1,11 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Idropdown } from "./InnerNavData";
+import { Ibottom, Idropdown } from "./InnerNavData";
 
 const InnerNavDropDownComponent = styled.div<{
   selectedInnerNavItem: string | null;
   innerNavItem: string;
 }>`
+  cursor: default;
   position: absolute;
   width: 100%;
   overflow: hidden;
@@ -22,7 +23,7 @@ const InnerNavDropDownComponent = styled.div<{
     props.selectedInnerNavItem === props.innerNavItem &&
     css`
       visibility: visible;
-      max-height: 1000px;
+      max-height: 1500px;
     `}
 `;
 
@@ -44,11 +45,15 @@ const InnerNavDropDownItem = styled.li`
 `;
 
 const InnerNavDropDownItemTitle = styled.label`
-  margin: 6px 0px;
+  margin: 8px 0px;
 
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 400;
   color: white;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const InnerNavDropDownItemSubTitle = styled.label`
@@ -57,30 +62,77 @@ const InnerNavDropDownItemSubTitle = styled.label`
   font-size: 12px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const InnerNavDropDownBottom = styled.div`
   background-color: #1d1d1d;
-  height: 100px;
 `;
 
-const InnerNavDropDownBottomWrapper = styled.div``;
+const InnerNavDropDownBottomWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  box-sizing: border-box;
+`;
 
-const InnerNavDropDownBottomItem = styled.div``;
+const InnerNavDropDownBottomItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  padding: 8px 0px;
+  line-height: 20px;
+`;
 
-const InnerNavDropDownBottomItemTitle = styled.label``;
+const InnerNavDropDownBottomItemTitle = styled.label`
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
-const InnerNavDropDownBottomItemSubTitle = styled.label``;
+const InnerNavDropDownBottomItemSubTitle = styled.label`
+  color: #64a716;
+`;
 //interface
 interface INavDropdownProps {
   dropdown: Idropdown[];
   selectedInnerNavItem: string | null;
   innerNavItem: string;
+  bottom: Ibottom[];
 }
+
+interface DropDownBottomProps {
+  bottom: Ibottom[];
+}
+const DropDownBottom = ({ bottom }: DropDownBottomProps) => {
+  return (
+    <InnerNavDropDownBottom>
+      <InnerNavDropDownBottomWrapper>
+        {bottom.map((i, index) => (
+          <InnerNavDropDownBottomItem key={index}>
+            <InnerNavDropDownBottomItemTitle>
+              {i.title}
+            </InnerNavDropDownBottomItemTitle>
+            <InnerNavDropDownBottomItemSubTitle>
+              {i.subTitle}
+            </InnerNavDropDownBottomItemSubTitle>
+          </InnerNavDropDownBottomItem>
+        ))}
+      </InnerNavDropDownBottomWrapper>
+    </InnerNavDropDownBottom>
+  );
+};
 const InnerNavDropDown = ({
   dropdown,
   selectedInnerNavItem,
   innerNavItem,
+  bottom,
 }: INavDropdownProps) => {
   console.log("selected :", selectedInnerNavItem);
   console.log("navitem:", innerNavItem);
@@ -103,8 +155,7 @@ const InnerNavDropDown = ({
           </InnerNavDropDownItemWrapper>
         ))}
       </InnerNavDropDownWrapper>
-
-      <InnerNavDropDownBottom />
+      <DropDownBottom bottom={bottom} />
     </InnerNavDropDownComponent>
   );
 };

@@ -16,7 +16,7 @@ export interface IsubTitle {
   value: string;
   path: string;
 }
-interface Ibottom {
+export interface Ibottom {
   title: string;
   subTitle: string;
 }
