@@ -1,17 +1,27 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Idropdown } from "./InnerNavData";
 
-const InnerNavDropDownComponent = styled.div`
+const InnerNavDropDownComponent = styled.div<{
+  selectedInnerNavItem: string | null;
+  innerNavItem: string;
+}>`
   position: absolute;
   width: 100%;
   height: 0px;
+  overflow: hidden;
+  transition: 0.5s;
   background-color: gray;
 
   box-sizing: border-box;
   border: none;
   top: 100%;
 
+  ${(props) =>
+    (props.selectedInnerNavItem===props.innerNavItem) &&
+    css`
+      height: 200px;
+    `}
 `;
 
 const InnerNavDropDownWrapper = styled.div`
@@ -41,10 +51,22 @@ const InnerNavDropDownItemSubTitle = styled.label`
 //interface
 interface INavDropdownProps {
   dropdown: Idropdown[];
+  selectedInnerNavItem: string | null;
+  innerNavItem: string;
 }
-const InnerNavDropDown = ({ dropdown }: INavDropdownProps) => {
+const InnerNavDropDown = ({
+  dropdown,
+  selectedInnerNavItem,
+  innerNavItem,
+}: INavDropdownProps) => {
+
+  console.log("selected :", selectedInnerNavItem);
+  console.log("navitem:", innerNavItem);
   return (
-    <InnerNavDropDownComponent>
+    <InnerNavDropDownComponent
+      selectedInnerNavItem={selectedInnerNavItem}
+      innerNavItem={innerNavItem}
+    >
       <InnerNavDropDownWrapper>
         {dropdown.map((i: Idropdown, index: number) => (
           <InnerNavDropDownItemWrapper key={index}>

@@ -28,32 +28,34 @@ const InnerNavItem = styled.li`
 
 //// interface
 
-
 const InnerNav = () => {
-  const [selectedInnerNavItem, setSelectedInnerNavItem] =
-    useState<string | null>(null);
+  const [selectedInnerNavItem, setSelectedInnerNavItem] = useState<
+    string | null
+  >(null);
 
   return (
     <InnerNavComponent>
       <InnerNavItemWrapper>
-        {Object.keys(data.innerNavItems).map((i: string, index: number) => (
+        {Object.keys(data.innerNavItems).map((key: string, index: number) => (
           <>
             <InnerNavItem
               key={index}
-              onClick={() => {
-                setSelectedInnerNavItem(data.innerNavItems[i].title );
-              }}
               onMouseEnter={() => {
                 console.log("enter");
+                setSelectedInnerNavItem(key);
               }}
               onMouseLeave={() => {
                 console.log("leave");
+                setSelectedInnerNavItem(null);
               }}
             >
-              {data.innerNavItems[i].title}
+              {data.innerNavItems[key].title}
             </InnerNavItem>
-            {console.log(data.innerNavItems[i].dropdown)}
-            <InnerNavDropDown dropdown={data.innerNavItems[i].dropdown} />
+            <InnerNavDropDown
+              dropdown={data.innerNavItems[key].dropdown}
+              selectedInnerNavItem={selectedInnerNavItem}
+              innerNavItem={key}
+            />
           </>
         ))}
       </InnerNavItemWrapper>
