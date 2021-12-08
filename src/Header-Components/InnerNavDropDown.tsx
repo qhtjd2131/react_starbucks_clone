@@ -1,33 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 import { Idropdown } from "./InnerNavData";
-import * as data from "./InnerNavDropDownData";
 
-const InnerNavDropDownComponent = styled.div``;
+const InnerNavDropDownComponent = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  background-color: gray;
 
-const InnerNavDropDownWrapper = styled.div``;
+  box-sizing: border-box;
+  border: none;
+  top: 100%;
+
+`;
+
+const InnerNavDropDownWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+`;
 
 const InnerNavDropDownItemWrapper = styled.ul``;
 
-const InnerNavDropDownItem = styled.li``;
+const InnerNavDropDownItem = styled.li`
+  display: flex;
+  flex-direction: column;
+`;
 
-const InnerNavDropDownItemTitle = styled.label``;
+const InnerNavDropDownItemTitle = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+`;
 
-const InnerNavDropDownItemSubTitle = styled.label``;
+const InnerNavDropDownItemSubTitle = styled.label`
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+`;
 
 //interface
 interface INavDropdownProps {
   dropdown: Idropdown[];
 }
 const InnerNavDropDown = ({ dropdown }: INavDropdownProps) => {
-    console.log("111",dropdown);
   return (
     <InnerNavDropDownComponent>
       <InnerNavDropDownWrapper>
-        {dropdown.map((i : any, index: number) => (
-          <InnerNavDropDownItemWrapper
-            key={index}
-          ></InnerNavDropDownItemWrapper>
+        {dropdown.map((i: Idropdown, index: number) => (
+          <InnerNavDropDownItemWrapper key={index}>
+            <InnerNavDropDownItem>
+              <InnerNavDropDownItemTitle>{i.title}</InnerNavDropDownItemTitle>
+              {i.subTitle.map((subtitle, index) => (
+                <InnerNavDropDownItemSubTitle key={index}>
+                  {subtitle.value}
+                </InnerNavDropDownItemSubTitle>
+              ))}
+            </InnerNavDropDownItem>
+          </InnerNavDropDownItemWrapper>
         ))}
       </InnerNavDropDownWrapper>
     </InnerNavDropDownComponent>

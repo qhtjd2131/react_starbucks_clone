@@ -7,9 +7,9 @@ import InnerNavDropDown from "./InnerNavDropDown";
 const InnerNavComponent = styled.nav`
   height: 55%;
   width: 100%;
-  border: 1px solid black;
   box-sizing: border-box;
   display: flex;
+  position: relative;
 `;
 const InnerNavItemWrapper = styled.ul`
   display: flex;
@@ -26,18 +26,12 @@ const InnerNavItem = styled.li`
   }
 `;
 
-const DropDownWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-`;
 //// interface
-interface IselectedInnerNavItem {
-  value: string | null;
-}
+
 
 const InnerNav = () => {
   const [selectedInnerNavItem, setSelectedInnerNavItem] =
-    useState<IselectedInnerNavItem | null>({ value: null });
+    useState<string | null>(null);
 
   return (
     <InnerNavComponent>
@@ -47,15 +41,19 @@ const InnerNav = () => {
             <InnerNavItem
               key={index}
               onClick={() => {
-                setSelectedInnerNavItem({ value: data.innerNavItems[i].title });
+                setSelectedInnerNavItem(data.innerNavItems[i].title );
+              }}
+              onMouseEnter={() => {
+                console.log("enter");
+              }}
+              onMouseLeave={() => {
+                console.log("leave");
               }}
             >
               {data.innerNavItems[i].title}
             </InnerNavItem>
             {console.log(data.innerNavItems[i].dropdown)}
-            <DropDownWrapper>
-                <InnerNavDropDown  dropdown={data.innerNavItems[i].dropdown} />
-            </DropDownWrapper>
+            <InnerNavDropDown dropdown={data.innerNavItems[i].dropdown} />
           </>
         ))}
       </InnerNavItemWrapper>

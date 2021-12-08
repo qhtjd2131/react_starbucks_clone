@@ -7,7 +7,7 @@ import UtilNav from "./Header-Components/UtilNav";
 const HeaderWrapper = styled.div`
   width: 100%;
   height: 120px;
-  border: 1px solid black;
+  box-sizing : border-box;
   position: fixed;
   top: 0;
   background-color: #f6f5ef;
