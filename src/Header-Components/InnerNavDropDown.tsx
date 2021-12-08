@@ -8,19 +8,25 @@ const InnerNavDropDownComponent = styled.div<{
 }>`
   position: absolute;
   width: 100%;
-  height: 0px;
   overflow: hidden;
-  transition: 0.5s;
   background-color: gray;
-
   box-sizing: border-box;
   border: none;
   top: 100%;
+  visibility: hidden;
+  max-height : 0px;
+  transition: visibility 0s, max-height 2s ease-out;
 
   ${(props) =>
-    (props.selectedInnerNavItem===props.innerNavItem) &&
+    props.selectedInnerNavItem === props.innerNavItem &&
     css`
-      height: 200px;
+      visibility: visible;
+      max-height : 1000px;
+    `}
+  ${(props) =>
+    !(props.selectedInnerNavItem === props.innerNavItem) &&
+    css`
+        
     `}
 `;
 
@@ -59,7 +65,6 @@ const InnerNavDropDown = ({
   selectedInnerNavItem,
   innerNavItem,
 }: INavDropdownProps) => {
-
   console.log("selected :", selectedInnerNavItem);
   console.log("navitem:", innerNavItem);
   return (
