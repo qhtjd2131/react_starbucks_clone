@@ -50,12 +50,13 @@ const InnerNav = () => {
               }}
             >
               {data.innerNavItems[key].title}
+
+              <InnerNavDropDown
+                dropdown={data.innerNavItems[key].dropdown}
+                selectedInnerNavItem={selectedInnerNavItem}
+                innerNavItem={key}
+              />
             </InnerNavItem>
-            <InnerNavDropDown
-              dropdown={data.innerNavItems[key].dropdown}
-              selectedInnerNavItem={selectedInnerNavItem}
-              innerNavItem={key}
-            />
           </>
         ))}
       </InnerNavItemWrapper>

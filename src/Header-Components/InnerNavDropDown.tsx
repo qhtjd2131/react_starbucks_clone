@@ -9,24 +9,20 @@ const InnerNavDropDownComponent = styled.div<{
   position: absolute;
   width: 100%;
   overflow: hidden;
-  background-color: gray;
+  background-color: #2c2a29;
   box-sizing: border-box;
   border: none;
   top: 100%;
+  left : 0;
   visibility: hidden;
-  max-height : 0px;
+  max-height: 0px;
   transition: visibility 0s, max-height 2s ease-out;
 
   ${(props) =>
     props.selectedInnerNavItem === props.innerNavItem &&
     css`
       visibility: visible;
-      max-height : 1000px;
-    `}
-  ${(props) =>
-    !(props.selectedInnerNavItem === props.innerNavItem) &&
-    css`
-        
+      max-height: 1000px;
     `}
 `;
 
@@ -34,9 +30,13 @@ const InnerNavDropDownWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
+  padding-right: 80px;
+  box-sizing: border-box;
 `;
 
-const InnerNavDropDownItemWrapper = styled.ul``;
+const InnerNavDropDownItemWrapper = styled.ul`
+  padding: 20px;
+`;
 
 const InnerNavDropDownItem = styled.li`
   display: flex;
@@ -44,12 +44,17 @@ const InnerNavDropDownItem = styled.li`
 `;
 
 const InnerNavDropDownItemTitle = styled.label`
-  font-size: 14px;
+  margin: 6px 0px;
+
+  font-size: 18px;
   font-weight: 500;
+  color: white;
 `;
 
 const InnerNavDropDownItemSubTitle = styled.label`
-  font-size: 10px;
+  color: gray;
+  margin: 6px 0px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
 `;

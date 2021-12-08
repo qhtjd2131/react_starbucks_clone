@@ -34,6 +34,7 @@ body {
 html, body, #root{
     width: 100%;
     height: 100%;
+    font-family: 'nbg', '맑은 고딕', HelveticaNeue, DroidSans, Sans-serif, Helvetica;
 }
 ol, ul {
 	list-style: none;
