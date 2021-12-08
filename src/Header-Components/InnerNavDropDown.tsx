@@ -13,7 +13,7 @@ const InnerNavDropDownComponent = styled.div<{
   box-sizing: border-box;
   border: none;
   top: 100%;
-  left : 0;
+  left: 0;
   visibility: hidden;
   max-height: 0px;
   transition: visibility 0s, max-height 2s ease-out;
@@ -59,6 +59,18 @@ const InnerNavDropDownItemSubTitle = styled.label`
   flex-direction: column;
 `;
 
+const InnerNavDropDownBottom = styled.div`
+  background-color: #1d1d1d;
+  height: 100px;
+`;
+
+const InnerNavDropDownBottomWrapper = styled.div``;
+
+const InnerNavDropDownBottomItem = styled.div``;
+
+const InnerNavDropDownBottomItemTitle = styled.label``;
+
+const InnerNavDropDownBottomItemSubTitle = styled.label``;
 //interface
 interface INavDropdownProps {
   dropdown: Idropdown[];
@@ -91,6 +103,8 @@ const InnerNavDropDown = ({
           </InnerNavDropDownItemWrapper>
         ))}
       </InnerNavDropDownWrapper>
+
+      <InnerNavDropDownBottom />
     </InnerNavDropDownComponent>
   );
 };

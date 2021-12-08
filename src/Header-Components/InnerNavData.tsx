@@ -3,9 +3,10 @@ interface IinnerNavItems {
 }
 
 interface Iitem {
-  [index: string]: string | Idropdown[];
+  [index: string]: string | Idropdown[] | Ibottom[];
   title: string;
   dropdown: Idropdown[];
+  bottom: Ibottom[];
 }
 export interface Idropdown {
   title: string;
@@ -14,6 +15,10 @@ export interface Idropdown {
 export interface IsubTitle {
   value: string;
   path: string;
+}
+interface Ibottom {
+  title: string;
+  subTitle: string;
 }
 export const innerNavItems: IinnerNavItems = {
   coffee: {
@@ -133,6 +138,16 @@ export const innerNavItems: IinnerNavItems = {
             path: "",
           },
         ],
+      },
+    ],
+    bottom: [
+      {
+        title: "나와 어울리는 커피 찾기",
+        subTitle: "스타벅스가 여러분에게 어울리는 커피를 찾아드립니다.",
+      },
+      {
+        title: "최상의 커피를 즐기는 법",
+        subTitle: "여러가지 방법을 통해 다양한 풍미의 커피를 즐겨보세요.",
       },
     ],
   },
@@ -282,6 +297,12 @@ export const innerNavItems: IinnerNavItems = {
         ],
       },
     ],
+    bottom: [
+      {
+        title: "나이트로 콜드 브루",
+        subTitle: "나이트로 커피 정통의 물결치듯 흘러내리는 캐스케이딩과 부드러운 크림을 경험하세요.",
+      },
+    ],
   },
   store: {
     title: "STORE",
@@ -319,6 +340,12 @@ export const innerNavItems: IinnerNavItems = {
             path: "",
           },
         ],
+      },
+    ],
+    bottom: [
+      {
+        title: "매장 찾기",
+        subTitle: "보다 빠르게 매장을 찾아보세요.",
       },
     ],
   },
@@ -410,6 +437,8 @@ export const innerNavItems: IinnerNavItems = {
         ],
       },
     ],
+    bottom: [
+    ],
   },
   rewards: {
     title: "STARBUCKS REWARDS",
@@ -484,6 +513,12 @@ export const innerNavItems: IinnerNavItems = {
             path: "",
           },
         ],
+      },
+    ],
+    bottom: [
+      {
+        title: "스타벅스 카드 등록하기",
+        subTitle: "카드 등록 후 리워드 서비스를 누리고 사용내역도 조회해보세요.",
       },
     ],
   },
@@ -573,6 +608,16 @@ export const innerNavItems: IinnerNavItems = {
       {
         title: "월페이퍼",
         subTitle: [],
+      },
+    ],
+    bottom: [
+      {
+        title: "매장별 이벤트",
+        subTitle: "스타벅스의 매장 이벤트 정보를 확인 하실 수 있습니다.",
+      },
+      {
+        title: "월페이퍼",
+        subTitle: "매월 업데이트 되는 월페이퍼(PC,Mobile)로 스타벅스를 더욱 가깝게 즐겨보세요.",
       },
     ],
   },
