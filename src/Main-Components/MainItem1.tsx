@@ -11,16 +11,44 @@ const MainItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const TitleItem = styled.img`
+const TitleItem = styled.img<{
+  isRender?: boolean;
+  transitionDelay?: string;
+}>`
   width: 30%;
   padding: 30px 0px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  transition-delay: ${(props) =>
+    props.transitionDelay ? props.transitionDelay + "s" : 1 + "s"};
+
+  ${(props) =>
+    props.isRender &&
+    css`
+      opacity: 1;
+    `};
 `;
 
-const TitleButtonWrapper = styled.div`
+const TitleButtonWrapper = styled.div<{
+  isRender?: boolean;
+  transitionDelay?: string;
+}>`
   width: 30%;
+  opacity: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.5s ease-in-out;
+
+  transition-delay: ${(props) =>
+    props.transitionDelay ? props.transitionDelay + "s" : 1 + "s"};
+
+  ${(props) =>
+    props.isRender &&
+    css`
+      opacity: 1;
+    `};
 `;
 const TitleButton = styled.button`
   font-size: 18px;
@@ -77,8 +105,10 @@ const MainItem1 = () => {
       <TitleItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_chiristmas2_slogan.png"
         alt=""
+        isRender={isRender}
+        transitionDelay="0.5"
       />
-      <TitleButtonWrapper>
+      <TitleButtonWrapper isRender={isRender} transitionDelay="2.5">
         <TitleButton>자세히 보기</TitleButton>
       </TitleButtonWrapper>
       <CoffeeItem
@@ -97,7 +127,7 @@ const MainItem1 = () => {
         leftPercent="43"
         width="32"
         isRender={isRender}
-        transitionDelay="2"
+        transitionDelay="1.5"
       />
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink3.png"
@@ -106,7 +136,7 @@ const MainItem1 = () => {
         leftPercent="65"
         width="39"
         isRender={isRender}
-        transitionDelay="3"
+        transitionDelay="2"
       />
     </MainItemWrapper>
   );
