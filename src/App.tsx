@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
+import Main from "./Main";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -14,6 +15,7 @@ const App = () => {
   return (
     <AppWrapper>
       <Header />
+      <Main />
     </AppWrapper>
   );
 };

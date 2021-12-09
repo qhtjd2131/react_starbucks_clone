@@ -8,10 +8,9 @@ const HeaderWrapper = styled.div`
   width: 100%;
   height: 120px;
   box-sizing : border-box;
-  position: fixed;
   top: 0;
   background-color: #f6f5ef;
-
+  position : relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

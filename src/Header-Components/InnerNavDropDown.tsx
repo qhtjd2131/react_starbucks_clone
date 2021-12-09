@@ -18,6 +18,7 @@ const InnerNavDropDownComponent = styled.div<{
   visibility: hidden;
   max-height: 0px;
   transition: visibility 0s, max-height 2s ease-out;
+  z-index : 5;
 
   ${(props) =>
     props.selectedInnerNavItem === props.innerNavItem &&

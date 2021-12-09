@@ -5,6 +5,7 @@ const LogoComponent = styled.img`
   position: absolute;
   left: 20px;
   top: 50%;
+  
   transform: translateY(-50%);
 `;
 
