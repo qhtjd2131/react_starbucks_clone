@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 
 const MainItemWrapper = styled.div`
   background-color: #d1131d;
@@ -40,16 +41,37 @@ const CoffeeItem = styled.img<{
   topPercent?: string;
   leftPercent?: string;
   width?: string;
+  isRender?: boolean;
+  transitionDelay?: string;
 }>`
   position: absolute;
   max-width: 100%;
+  opacity: 0;
   top: ${(props) => (props.topPercent ? props.topPercent + "%" : 0)};
+
   left: ${(props) =>
     props.leftPercent ? props.leftPercent + "%" : 200 + "px"};
-  width: ${(props) => (props.width ? props.width + "%" : 0)};
+
+  width: ${(props) => (props.width ? props.width + "%" : 100)};
+
+  transition: opacity 0.5s ease-in-out;
+
+  transition-delay: ${(props) =>
+    props.transitionDelay ? props.transitionDelay + "s" : 1 + "s"};
+
+  ${(props) =>
+    props.isRender &&
+    css`
+      opacity: 1;
+    `};
 `;
 
 const MainItem1 = () => {
+  const [isRender, setIsRender] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsRender(true);
+  }, []);
   return (
     <MainItemWrapper>
       <TitleItem
@@ -65,6 +87,8 @@ const MainItem1 = () => {
         topPercent="40"
         leftPercent="10"
         width="38"
+        isRender={isRender}
+        transitionDelay="1"
       />
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink2.png"
@@ -72,6 +96,8 @@ const MainItem1 = () => {
         topPercent="20"
         leftPercent="43"
         width="32"
+        isRender={isRender}
+        transitionDelay="2"
       />
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink3.png"
@@ -79,6 +105,8 @@ const MainItem1 = () => {
         topPercent="15"
         leftPercent="65"
         width="39"
+        isRender={isRender}
+        transitionDelay="3"
       />
     </MainItemWrapper>
   );
