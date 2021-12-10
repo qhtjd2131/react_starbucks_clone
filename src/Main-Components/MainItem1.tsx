@@ -19,7 +19,6 @@ const TitleItem = styled.img<{
   padding: 30px 0px;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-
   transition-delay: ${(props) =>
     props.transitionDelay ? props.transitionDelay + "s" : 1 + "s"};
 
