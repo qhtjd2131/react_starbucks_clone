@@ -24,7 +24,7 @@ const NoticeLeft = styled.div`
   position: relative;
 `;
 const NoticeRight = styled.div`
-  background-color: white;
+  background-color: #f6f5ef;
   height: 100%;
   width: 50%;
 
@@ -110,7 +110,7 @@ const RightButton = styled.button`
   width: 36px;
   height: 36px;
   border: 2px solid black;
-  background-color : white;
+  background-color : #f6f5ef;
   border-radius: 50%;
   cursor: pointer;
 `;

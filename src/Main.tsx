@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import MainItem1 from "./Main-Components/MainItem1";
 import Notice from "./Main-Components/Notice";
+import Promotion from "./Main-Components/Promotion";
+import Rewards from "./Main-Components/Rewards";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -13,6 +15,8 @@ const Main = () => {
     <MainWrapper>
       <MainItem1 />
       <Notice />
+      <Promotion />
+      <Rewards />
     </MainWrapper>
   );
 };
