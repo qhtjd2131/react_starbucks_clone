@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 
 const MainItemWrapper = styled.div`
@@ -100,7 +100,6 @@ const CoffeeItem = styled.img<{
 
 const MainItem1 = () => {
   const [isRender, setIsRender] = useState<boolean>(false);
-
   useEffect(() => {
     setIsRender(true);
   }, []);
@@ -129,6 +128,7 @@ const MainItem1 = () => {
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink2.png"
         alt=""
+
         topPercent="20"
         leftPercent="43"
         width="32"
@@ -140,6 +140,7 @@ const MainItem1 = () => {
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink3.png"
         alt=""
+
         topPercent="15"
         leftPercent="65"
         width="39"
