@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 const ChristmasBlendComponent = styled.div`
   background-image: url("https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_bean_bg.jpg");
+    background-size : cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 100px 20px;
 `;
 
 const BlendImage = styled.img`
@@ -40,6 +41,14 @@ const BlendDescriptionButton = styled.button`
   width: 130px;
   padding: 10px;
   font-weight: 700;
+  cursor: pointer;
+  transition : 0.6s ease-in-out;
+
+ &:hover{
+     color : white;
+     background-color : black;
+     text-decoration : underline;
+ }
 `;
 
 const ChristmasBlend = () => {

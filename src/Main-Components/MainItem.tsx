@@ -5,6 +5,7 @@ const MainItemWrapper = styled.div`
   background-color: #d1131d;
   position: relative;
   width: 100%;
+  min-width: 800px;
   height: 700px;
   box-sizing: border-box;
   padding: 20px;
@@ -70,9 +71,13 @@ const CoffeeItem = styled.img<{
   width?: string;
   isRender?: boolean;
   transitionDelay?: string;
+  maxWidth?: string;
+  minWidth?: string;
 }>`
   position: absolute;
-  max-width: 100%;
+  max-width: ${(props) =>
+    props.maxWidth ? props.maxWidth + "px" : 1000 + "px"};
+  min-width: ${(props) => (props.minWidth ? props.minWidth + "px" : 0 + "px")};
   opacity: 0;
   top: ${(props) => (props.topPercent ? props.topPercent + "%" : 0)};
 
@@ -118,6 +123,8 @@ const MainItem1 = () => {
         width="38"
         isRender={isRender}
         transitionDelay="1"
+        maxWidth="500"
+        minWidth="300"
       />
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink2.png"
@@ -127,6 +134,8 @@ const MainItem1 = () => {
         width="32"
         isRender={isRender}
         transitionDelay="1.5"
+        maxWidth="400"
+        minWidth="200"
       />
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink3.png"
@@ -136,6 +145,8 @@ const MainItem1 = () => {
         width="39"
         isRender={isRender}
         transitionDelay="2"
+        maxWidth="500"
+        minWidth="300"
       />
     </MainItemWrapper>
   );

@@ -3,15 +3,19 @@ import styled from "styled-components";
 
 const RewardsComponent = styled.div`
   background-color: #1e3932;
+  display: flex;
+  justify-content: center;
 `;
 
 const RewardsContainer = styled.div`
   display: flex;
-  align-items : center;
+  align-items: center;
+
   color: white;
   padding: 30px;
   box-sizing: border-box;
-  min-width : 1160px;
+  min-width: 1160px;
+  max-width: 1300px;
 `;
 
 const RewardsLogo = styled.img`
@@ -25,7 +29,7 @@ const RewardsItemWrapper = styled.div`
   gap: 20px;
   line-height: 24px;
   letter-spacing: -1.5px;
-  width : 100%;
+  width: 100%;
 `;
 
 const RewardsInfo = styled.div`
@@ -37,7 +41,6 @@ const RewardsInfo = styled.div`
 const RewardsGift = styled.div`
   display: flex;
   justify-content: space-between;
-
 `;
 
 const InfoTitle = styled.label`
@@ -57,31 +60,32 @@ const InfoSubTitle = styled.label`
 
 const LoginContainer = styled.div`
   display: flex;
-  gap : 10px;
+  gap: 10px;
 `;
 
-
 const Button = styled.button`
-    border-radius : 8px;
-    color : white;
-    background-color : transparent;
-    padding : 10px 20px;
-    border : 1px solid white;
-    font-size : 16px;
+  border-radius: 8px;
+  color: white;
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 1px solid white;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const SignUpButton = styled(Button)`
-  background-color : #00704a;
-  border : none;
+  background-color: #00704a;
+  border: none;
 `;
 
-
-const LoginButton = styled(Button)`
-`;
+const LoginButton = styled(Button)``;
 
 const GiftDescription = styled.label``;
 const GiftButton = styled(Button)`
-    padding : 10px 30px;
+  padding: 10px 30px;
 `;
 
 const Strong = styled.label`
