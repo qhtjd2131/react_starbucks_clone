@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ChristmasBlend from "./Main-Components/ChristmasBlend";
 import MainItem1 from "./Main-Components/MainItem";
 import Notice from "./Main-Components/Notice";
 import Promotion from "./Main-Components/Promotion";
@@ -17,6 +18,7 @@ const Main = () => {
       <Notice />
       <Promotion />
       <Rewards />
+      <ChristmasBlend />
     </MainWrapper>
   );
 };
