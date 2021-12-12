@@ -1,4 +1,4 @@
-import { Sign } from "crypto";
+import React from "react";
 import styled from "styled-components";
 
 const RewardsComponent = styled.div`
@@ -11,6 +11,7 @@ const RewardsContainer = styled.div`
   color: white;
   padding: 30px;
   box-sizing: border-box;
+  min-width : 1160px;
 `;
 
 const RewardsLogo = styled.img`
@@ -56,14 +57,32 @@ const InfoSubTitle = styled.label`
 
 const LoginContainer = styled.div`
   display: flex;
+  gap : 10px;
 `;
 
-const SignUpButton = styled.button``;
 
-const LoginButton = styled.button``;
+const Button = styled.button`
+    border-radius : 8px;
+    color : white;
+    background-color : transparent;
+    padding : 10px 20px;
+    border : 1px solid white;
+    font-size : 16px;
+`;
+
+const SignUpButton = styled(Button)`
+  background-color : #00704a;
+  border : none;
+`;
+
+
+const LoginButton = styled(Button)`
+`;
 
 const GiftDescription = styled.label``;
-const GiftButton = styled.button``;
+const GiftButton = styled(Button)`
+    padding : 10px 30px;
+`;
 
 const Strong = styled.label`
   font-weight: 700;
