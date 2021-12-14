@@ -6,28 +6,28 @@ import * as data from "./PromotionData";
 const PromotionContainer = styled.div`
   overflow-y: hidden;
   overflow-x: scroll;
-  z-index : 999;
+  z-index: 999;
 `;
 
 const PromotionItemWrapper = styled.div`
   background-color: #f6f5ef;
   display: flex;
-  gap: 10px;
   padding: 30px 0px;
 `;
 
-const PromotionItem = styled.div``;
+const PromotionItem = styled.div`
 
-const PromotionImage = styled.img``;
+`;
+
+const PromotionImage = styled.img`
+  width: 400px;
+  padding : 0px 10px;
+`;
 
 const ControllBarWrapper = styled.div``;
 
-
-
-
-
 const Stripes = styled.div`
-position: absolute;
+  position: absolute;
   bottom: 2rem;
   right: 1rem;
   width: 40%;
@@ -35,25 +35,23 @@ position: absolute;
   height: 50px;
   display: flex;
   align-items: center;
-  border : 1px solid black;
-  `
+  border: 1px solid black;
+`;
 
-  const Span = styled.span`
+const Span = styled.span`
   width: 60px;
   height: 5px;
-  background-color: white;
-  content: '';
+  background-color: blue;
+  content: "";
   display: block;
   border-radius: 10px;
   margin: 1rem;
   cursor: pointer;
-  border : 1px solid blue;
-
-  `
+  border: 3px solid blue;
+`;
 
 //interface
 
-interface IPromotionProps {}
 interface Istate {
   prev: number;
   current: number;
@@ -70,15 +68,17 @@ const Promotion = () => {
     paused: true,
   });
 
-  const [state, setState] = useState<Istate>({ prev: 0, current: 1, next: 2 });
+  const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1});
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const activateTimer = () => {
+    //타이머
     timer = setTimeout(() => {
       stepForward();
-    }, 4000);
+    }, 3000);
   };
 
   const calculateIndexs = (index: number) => {
+    //인덱스계산
     if (index === data.promotionData.length - 1) {
       setState({ prev: 1, current: index, next: 0 });
     } else if (index === 0) {
@@ -89,14 +89,45 @@ const Promotion = () => {
   };
 
   const flowUp = (onComplete: any) => {
+    //시간에 따라 자동적으로 넘길때
     timeline
-      .to(elems.current[0], { y: "-100%", opacity: 0, scale: -0.5 })
+      .to(elems.current[0], {
+        x: "-100%",
+        opacity: 0.5,
+        onComplete,
+      })
       .to(
         elems.current[1],
         {
-          y: "-100%",
-          opacity: 1,
-          scale: 1,
+          x: "-100%",
+          opacity: 0.5,
+          onComplete,
+        },
+        "-=0.75"
+      )
+      .to(
+        elems.current[2],
+        {
+          x: "-100%",
+          opacity: 0.5,
+          onComplete,
+        },
+        "-=0.75"
+      )
+      .to(
+        elems.current[3],
+        {
+          x: "-100%",
+          opacity: 0.5,
+          onComplete,
+        },
+        "-=0.75"
+      )
+      .to(
+        elems.current[4],
+        {
+          x: "-100%",
+          opacity: 0.5,
           onComplete,
         },
         "-=0.75"
@@ -105,10 +136,11 @@ const Promotion = () => {
   };
 
   const fadeOut = (onComplete: any) => {
+    //아래 버튼 클릭해서 이동할때
     timeline
       .to(elems.current[0], {
         duration: 0.5,
-        opacity: 0,
+        opacity: 0.5,
         onComplete,
       })
       .to(elems.current[0], { opacity: 1 })
@@ -126,22 +158,26 @@ const Promotion = () => {
     setUserDetected(false);
     flowUp(() => calculateIndexs(state.next));
   };
-  useEffect(() => {}, []);
   useLayoutEffect(() => {
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
-
     const image3 = !!elems.current[2] && elems.current[2];
+    const image4 = !!elems.current[3] && elems.current[3];
+    const image5 = !!elems.current[4] && elems.current[4];
 
     activateTimer();
 
-    gsap.set(image2, { x: "0%", opacity: 0, scale: 1 });
+    gsap.set(image2, { x: "0%", opacity: 1 });
     if (userDetected) {
-      gsap.set(image1, { y: "0%", opacity: 0, scale: 1 });
-      gsap.set(image3, { y: "0%", opacity: 0, scale: 1 });
+      gsap.set(image1, { x: "0%", opacity: 0.5 });
+      gsap.set(image3, { x: "0%", opacity: 0.5 });
+      gsap.set(image4, { x: "0%", opacity: 0.5 });
+      gsap.set(image5, { x: "0%", opacity: 0.5 });
     } else {
-      gsap.set(image1, { y: "0%", opacity: 1, scale: 1 });
-      gsap.set(image3, { y: "0%", opacity: 1, scale: 1 });
+      gsap.set(image1, { x: "0%", opacity: 0.5 });
+      gsap.set(image3, { x: "0%", opacity: 0.5 });
+      gsap.set(image4, { x: "0%", opacity: 0.5 });
+      gsap.set(image5, { x: "0%", opacity: 0.5 });
     }
 
     return () => {
@@ -180,20 +216,36 @@ const Promotion = () => {
             alt=""
           />
         </PromotionItem>
+        <PromotionItem>
+          <PromotionImage
+            ref={(elem) => (elems.current[3] = elem)}
+            src={data.promotionData[state.prev].imgSrc}
+            alt=""
+          />
+        </PromotionItem>
+
+        <PromotionItem>
+          <PromotionImage
+            ref={(elem) => (elems.current[4] = elem)}
+            src={data.promotionData[state.current].imgSrc}
+            alt=""
+          />
+        </PromotionItem>
+
         <Stripes>
           {data.promotionData.map((_item, index) =>
             index === state.current ? (
-              <span
+              <Span
                 key={`stripe${index}`}
                 onClick={() => handleChange(index)}
                 style={{ opacity: 1 }}
-              ></span>
+              ></Span>
             ) : (
-              <span
+              <Span
                 key={`stripe${index}`}
                 onClick={() => handleChange(index)}
                 style={{ opacity: 0.5 }}
-              ></span>
+              ></Span>
             )
           )}
         </Stripes>

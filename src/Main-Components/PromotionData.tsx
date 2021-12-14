@@ -1,11 +1,10 @@
-
 interface Iitem {
-    title : string,
-    imgSrc : string,
-    links : string,
+  title: string;
+  imgSrc: string;
+  links: string;
 }
 
-export const promotionData : Iitem[]= [
+export const promotionData: Iitem[] = [
   {
     title: "",
     imgSrc:
