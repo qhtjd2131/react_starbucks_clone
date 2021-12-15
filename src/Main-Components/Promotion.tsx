@@ -247,6 +247,13 @@ const Promotion = () => {
 
         <PromotionItem>
           <PromotionImage
+            ref={(elem) => (elems.current[4] = elem)}
+            src={data.promotionData[state.next].imgSrc}
+            alt=""
+          />
+        </PromotionItem>
+        <PromotionItem>
+          <PromotionImage
             ref={(elem) => (elems.current[0] = elem)}
             src={data.promotionData[state.prev].imgSrc}
             alt=""
@@ -272,14 +279,6 @@ const Promotion = () => {
           <PromotionImage
             ref={(elem) => (elems.current[3] = elem)}
             src={data.promotionData[state.prev].imgSrc}
-            alt=""
-          />
-        </PromotionItem>
-
-        <PromotionItem>
-          <PromotionImage
-            ref={(elem) => (elems.current[4] = elem)}
-            src={data.promotionData[state.current].imgSrc}
             alt=""
           />
         </PromotionItem>
