@@ -30,7 +30,7 @@ const NoticeRight = styled.div`
 
   display: flex;
   justify-content: center;
-  align-items  :center;
+  align-items: center;
 `;
 
 const LeftTitle = styled.label`
@@ -110,7 +110,7 @@ const RightButton = styled.button`
   width: 36px;
   height: 36px;
   border: 2px solid black;
-  background-color : #f6f5ef;
+  background-color: #f6f5ef;
   border-radius: 50%;
   cursor: pointer;
 `;
@@ -122,7 +122,7 @@ const Notice = () => {
     const interval = setInterval(() => {
       setNoticeIndex((i) => {
         let result = (i + 1) % 5;
-        console.log(result);
+        // console.log(result);
         return result;
       });
     }, 2500);

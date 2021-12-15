@@ -36,7 +36,6 @@ const PromotionItemWrapper = styled.div`
   left: 50%;
 `;
 const PromotionItem = styled.div`
-
   min-width: 0;
 `;
 
@@ -73,6 +72,11 @@ const Span = styled.span`
   margin: 1rem;
   cursor: pointer;
 `;
+const PlayButton = styled.button`
+  width: 30px;
+  height: 30px;
+`;
+
 const Button = styled.button`
   width: 60px;
   height: 60px;
@@ -246,6 +250,11 @@ const Promotion = () => {
     flowUp(() => calculateIndexs(state.next));
   };
 
+  const handlePlay = () => {
+    console.log("clear timer");
+    clearTimeout(timer);
+  };
+
   useLayoutEffect(() => {
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
@@ -254,6 +263,7 @@ const Promotion = () => {
     const image5 = !!elems.current[4] && elems.current[4];
 
     activateTimer(); //moving item
+    console.log("reset timer");
 
     gsap.set(image2, { x: "0%", opacity: 1 });
     if (userDetected) {
@@ -319,7 +329,12 @@ const Promotion = () => {
           />
         </PromotionItem>
 
+        <ButtonRight onClick={() => handleRight()}>{">"}</ButtonRight>
+        <ButtonLeft onClick={() => handleLeft()}>{"<"}</ButtonLeft>
+      </PromotionItemWrapper>
+      <ControllBarWrapper>
         <Stripes>
+          <PlayButton onClick={() => handlePlay()}>=</PlayButton>
           {data.promotionData.map((_item, index) =>
             index === state.current ? (
               <Span
@@ -336,10 +351,7 @@ const Promotion = () => {
             )
           )}
         </Stripes>
-        <ButtonRight onClick={() => handleRight()}>{">"}</ButtonRight>
-        <ButtonLeft onClick={() => handleLeft()}>{"<"}</ButtonLeft>
-      </PromotionItemWrapper>
-      <ControllBarWrapper></ControllBarWrapper>
+      </ControllBarWrapper>
     </PromotionContainer>
   );
 };
