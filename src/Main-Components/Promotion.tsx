@@ -1,5 +1,6 @@
 import {
   ComponentType,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -119,11 +120,14 @@ const Promotion = () => {
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
   const [isChanging, setIsChanging] = useState<boolean>(false);
+  const [playState, setPlayState] = useState<boolean>(true);
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+
   const activateTimer = () => {
     //타이머
     timer = setTimeout(() => {
       stepForward();
-    }, 3000);
+    }, 2000);
   };
 
   const calculateIndexs = (index: number) => {
@@ -145,6 +149,8 @@ const Promotion = () => {
     direction: "left" | "right" = "right",
     repeat: number = 1
   ) => {
+    console.log("flowUp Function excuted!");
+    console.log("flowUp(playstate):", playState);
     let number_d: number = -100 * repeat;
 
     if (direction === "left") {
@@ -194,21 +200,6 @@ const Promotion = () => {
       .play();
   };
 
-  const fadeOut = (onComplete: any) => {
-    //아래 버튼 클릭해서 이동할때
-    timeline
-      .to(
-        elems.current[1],
-        {
-          x: "100%",
-          opacity: 0.5,
-          onComplete,
-        },
-        "-=7.5"
-      )
-      .play();
-  };
-
   const handleChange = (index: number) => {
     if (!isChanging) {
       if (index !== state.current) {
@@ -250,21 +241,44 @@ const Promotion = () => {
     flowUp(() => calculateIndexs(state.next));
   };
 
+  //   useEffect(() => {
+  //     if (isFirstRender) {
+  //       console.log("first render");
+  //       setIsFirstRender(false);
+  //     } else {
+  //       if (playState) {
+  //         console.log("in if(playstate):", playState);
+
+  //         activateTimer();
+  //       }
+  //     }
+  //   }, [playState]);
+
   const handlePlay = () => {
-    console.log("clear timer");
     clearTimeout(timer);
+    console.log("clear timer");
+    if (playState) {
+      console.log("////stop////");
+
+      setPlayState(() => !playState);
+    } else {
+      console.log("////play////");
+      setPlayState(() => !playState);
+    }
   };
 
   useLayoutEffect(() => {
+    console.log("uselayoutEffect");
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
     const image3 = !!elems.current[2] && elems.current[2];
     const image4 = !!elems.current[3] && elems.current[3];
     const image5 = !!elems.current[4] && elems.current[4];
 
-    activateTimer(); //moving item
-    console.log("reset timer");
-
+    if (playState) {
+      activateTimer(); //moving item
+      console.log("activateTimer");
+    }
     gsap.set(image2, { x: "0%", opacity: 1 });
     if (userDetected) {
       gsap.set(image1, { x: "0%", opacity: 0.5 });
@@ -281,16 +295,12 @@ const Promotion = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [state]);
+  }, [state, playState]);
+
+  useEffect(() => {}, []);
   return (
     <PromotionContainer>
       <PromotionItemWrapper>
-        {/* {data.promotionData.map((i, index) => (
-          <PromotionItem key={index}>
-            <PromotionImage src={i.imgSrc} alt="" />
-          </PromotionItem>
-        ))} */}
-
         <PromotionItem>
           <PromotionImage
             ref={(elem) => (elems.current[4] = elem)}

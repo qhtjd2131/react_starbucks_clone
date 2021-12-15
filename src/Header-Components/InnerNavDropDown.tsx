@@ -135,8 +135,8 @@ const InnerNavDropDown = ({
   innerNavItem,
   bottom,
 }: INavDropdownProps) => {
-  console.log("selected :", selectedInnerNavItem);
-  console.log("navitem:", innerNavItem);
+//   console.log("selected :", selectedInnerNavItem);
+//   console.log("navitem:", innerNavItem);
   return (
     <InnerNavDropDownComponent
       selectedInnerNavItem={selectedInnerNavItem}

@@ -41,11 +41,9 @@ const InnerNav = () => {
             <InnerNavItem
               key={index}
               onMouseEnter={() => {
-                console.log("enter");
                 setSelectedInnerNavItem(key);
               }}
               onMouseLeave={() => {
-                console.log("leave");
                 setSelectedInnerNavItem(null);
               }}
             >
