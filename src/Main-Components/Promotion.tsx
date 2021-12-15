@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  ComponentType,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
@@ -6,29 +12,36 @@ import * as data from "./PromotionData";
 const PromotionContainer = styled.div`
   overflow-y: hidden;
   overflow-x: scroll;
-  z-index: 999;
+  width: 100%;
+  position: relative;
 `;
 
 const PromotionItemWrapper = styled.div`
   background-color: #f6f5ef;
   display: flex;
   padding: 30px 0px;
+  min-width: 0;
+
+  width: 100%;
 `;
 
 const PromotionItem = styled.div`
-
+  width: 100%;
+  min-width: 0;
 `;
 
 const PromotionImage = styled.img`
-  width: 400px;
-  padding : 0px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px 10px;
+  min-width: 0;
 `;
 
 const ControllBarWrapper = styled.div``;
 
 const Stripes = styled.div`
   position: absolute;
-  bottom: 2rem;
+  bottom: 0rem;
   right: 1rem;
   width: 40%;
   z-index: 100;
@@ -49,6 +62,23 @@ const Span = styled.span`
   cursor: pointer;
   border: 3px solid blue;
 `;
+const Button = styled.button`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+`;
+const ButtonLeft = styled(Button)`
+  top: 50%;
+  left: 30px;
+`;
+
+const ButtonRight = styled(Button)`
+  top: 50%;
+  right: 30px;
+`;
 
 //interface
 
@@ -68,7 +98,7 @@ const Promotion = () => {
     paused: true,
   });
 
-  const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1});
+  const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const activateTimer = () => {
     //타이머
@@ -79,6 +109,7 @@ const Promotion = () => {
 
   const calculateIndexs = (index: number) => {
     //인덱스계산
+
     if (index === data.promotionData.length - 1) {
       setState({ prev: 1, current: index, next: 0 });
     } else if (index === 0) {
@@ -88,18 +119,22 @@ const Promotion = () => {
     }
   };
 
-  const flowUp = (onComplete: any) => {
+  const flowUp = (onComplete: any, direction: string = "right") => {
+    let d: string = "-100%";
+    if (direction === "left") {
+      d = "100%";
+    }
     //시간에 따라 자동적으로 넘길때
     timeline
       .to(elems.current[0], {
-        x: "-100%",
+        x: d,
         opacity: 0.5,
         onComplete,
       })
       .to(
         elems.current[1],
         {
-          x: "-100%",
+          x: d,
           opacity: 0.5,
           onComplete,
         },
@@ -108,7 +143,7 @@ const Promotion = () => {
       .to(
         elems.current[2],
         {
-          x: "-100%",
+          x: d,
           opacity: 0.5,
           onComplete,
         },
@@ -117,7 +152,7 @@ const Promotion = () => {
       .to(
         elems.current[3],
         {
-          x: "-100%",
+          x: d,
           opacity: 0.5,
           onComplete,
         },
@@ -126,7 +161,7 @@ const Promotion = () => {
       .to(
         elems.current[4],
         {
-          x: "-100%",
+          x: d,
           opacity: 0.5,
           onComplete,
         },
@@ -143,7 +178,6 @@ const Promotion = () => {
         opacity: 0.5,
         onComplete,
       })
-      .to(elems.current[0], { opacity: 1 })
       .play();
   };
 
@@ -153,6 +187,17 @@ const Promotion = () => {
       setUserDetected(true);
       fadeOut(() => calculateIndexs(index));
     }
+  };
+
+  const handleRight = () => {
+    clearTimeout(timer);
+    setUserDetected(true);
+    flowUp(() => calculateIndexs(state.next));
+  };
+  const handleLeft = () => {
+    clearTimeout(timer);
+    setUserDetected(true);
+    flowUp(() => calculateIndexs(state.prev), "left");
   };
   const stepForward = () => {
     setUserDetected(false);
@@ -165,7 +210,7 @@ const Promotion = () => {
     const image4 = !!elems.current[3] && elems.current[3];
     const image5 = !!elems.current[4] && elems.current[4];
 
-    activateTimer();
+    activateTimer(); //moving item
 
     gsap.set(image2, { x: "0%", opacity: 1 });
     if (userDetected) {
@@ -249,6 +294,8 @@ const Promotion = () => {
             )
           )}
         </Stripes>
+        <ButtonRight onClick={() => handleRight()}>{">"}</ButtonRight>
+        <ButtonLeft onClick={() => handleLeft()}>{"<"}</ButtonLeft>
       </PromotionItemWrapper>
       <ControllBarWrapper></ControllBarWrapper>
     </PromotionContainer>
