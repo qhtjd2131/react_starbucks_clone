@@ -10,6 +10,8 @@ import styled from "styled-components";
 import * as data from "./PromotionData";
 
 export const SCALE_XL = 3.5; //xl : 3.5
+export const SLIDE_ITEM_WIDTH = 950;
+export const ITEM_COUNT = 5;
 
 //style
 const PromotionContainer = styled.div`
@@ -25,17 +27,21 @@ const PromotionItemWrapper = styled.div`
   padding: 30px 0px;
 
   position: relative;
-  transform: translateX(calc(50% / ${SCALE_XL}));
+  /* transform: translateX(calc(50% / ${SCALE_XL}));
   width: calc(100% * ${SCALE_XL});
-  left: calc(-50% * ${SCALE_XL});
+  left: calc(-50% * ${SCALE_XL}); */
+
+  transform: translateX(-50%);
+  width: calc(${SLIDE_ITEM_WIDTH}px * ${ITEM_COUNT});
+  left: 50%;
 `;
 const PromotionItem = styled.div`
-  width: 100%;
+
   min-width: 0;
 `;
 
 const PromotionImage = styled.img`
-  width: 100%;
+  width: ${SLIDE_ITEM_WIDTH}px;
   box-sizing: border-box;
   padding: 0px 10px;
   min-width: 0;
@@ -79,12 +85,12 @@ const Button = styled.button`
 `;
 const ButtonLeft = styled(Button)`
   top: 40%;
-  left: 37%;
+  left: 38%;
 `;
 
 const ButtonRight = styled(Button)`
   top: 40%;
-  right: 37%;
+  right: 38%;
 `;
 
 //interface
