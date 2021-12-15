@@ -9,7 +9,7 @@ import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
 
-export const SCALE_XL = 3.5;
+export const SCALE_XL = 3.5; //xl : 3.5
 
 //style
 const PromotionContainer = styled.div`
@@ -29,7 +29,6 @@ const PromotionItemWrapper = styled.div`
   width: calc(100% * ${SCALE_XL});
   left: calc(-50% * ${SCALE_XL});
 `;
-
 const PromotionItem = styled.div`
   width: 100%;
   min-width: 0;
@@ -67,7 +66,6 @@ const Span = styled.span`
   border-radius: 10px;
   margin: 1rem;
   cursor: pointer;
-  border: 3px solid blue;
 `;
 const Button = styled.button`
   width: 60px;
@@ -110,6 +108,7 @@ const Promotion = () => {
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
+  const [isChanging, setIsChanging] = useState<boolean>(false);
   const activateTimer = () => {
     //타이머
     timer = setTimeout(() => {
@@ -128,13 +127,21 @@ const Promotion = () => {
       setState({ prev: index - 1, current: index, next: index + 1 });
     }
     setIsSliding(false);
+    setIsChanging(false);
   };
 
-  const flowUp = (onComplete: any, direction: string = "right") => {
-    let d: string = "-100%";
+  const flowUp = (
+    onComplete: any,
+    direction: "left" | "right" = "right",
+    repeat: number = 1
+  ) => {
+    let number_d: number = -100 * repeat;
+
     if (direction === "left") {
-      d = "100%";
+      number_d = 100 * repeat;
     }
+    const d: string = number_d + "%";
+
     //시간에 따라 자동적으로 넘길때
     timeline
       .to(elems.current[0], {
@@ -180,19 +187,33 @@ const Promotion = () => {
   const fadeOut = (onComplete: any) => {
     //아래 버튼 클릭해서 이동할때
     timeline
-      .to(elems.current[0], {
-        duration: 0.5,
-        opacity: 0.5,
-        onComplete,
-      })
+      .to(
+        elems.current[1],
+        {
+          x: "100%",
+          opacity: 0.5,
+          onComplete,
+        },
+        "-=7.5"
+      )
       .play();
   };
 
   const handleChange = (index: number) => {
-    if (index !== state.current) {
-      clearTimeout(timer);
-      setUserDetected(true);
-      fadeOut(() => calculateIndexs(index));
+    if (!isChanging) {
+      if (index !== state.current) {
+        setIsChanging(true);
+        clearTimeout(timer);
+        setUserDetected(true);
+        const result: number = state.current - index;
+        if (result < 0) {
+          //right
+          flowUp(() => calculateIndexs(index), "right", result * -1);
+        } else if (result > 0) {
+          //left
+          flowUp(() => calculateIndexs(index), "left", result);
+        }
+      }
     }
   };
 
