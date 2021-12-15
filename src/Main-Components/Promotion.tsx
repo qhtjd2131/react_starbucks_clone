@@ -8,6 +8,9 @@ import {
 import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
+
+export const SCALE_XL = 3.5;
+
 //style
 const PromotionContainer = styled.div`
   overflow-y: hidden;
@@ -20,9 +23,11 @@ const PromotionItemWrapper = styled.div`
   background-color: #f6f5ef;
   display: flex;
   padding: 30px 0px;
-  min-width: 0;
 
-  width: 100%;
+  position: relative;
+  transform: translateX(calc(50% / ${SCALE_XL}));
+  width: calc(100% * ${SCALE_XL});
+  left: calc(-50% * ${SCALE_XL});
 `;
 
 const PromotionItem = styled.div`
@@ -41,12 +46,14 @@ const ControllBarWrapper = styled.div``;
 
 const Stripes = styled.div`
   position: absolute;
-  bottom: 0rem;
-  right: 1rem;
-  width: 40%;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 20%;
   z-index: 100;
   height: 50px;
   display: flex;
+  justify-content: center;
   align-items: center;
   border: 1px solid black;
 `;
@@ -63,21 +70,23 @@ const Span = styled.span`
   border: 3px solid blue;
 `;
 const Button = styled.button`
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background-color: white;
+  background-color: transparent;
   border: 2px solid black;
   position: absolute;
+  cursor: pointer;
+  font-size: 40px;
 `;
 const ButtonLeft = styled(Button)`
-  top: 50%;
-  left: 30px;
+  top: 40%;
+  left: 37%;
 `;
 
 const ButtonRight = styled(Button)`
-  top: 50%;
-  right: 30px;
+  top: 40%;
+  right: 37%;
 `;
 
 //interface
