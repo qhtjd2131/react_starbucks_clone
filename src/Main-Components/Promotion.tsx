@@ -100,6 +100,7 @@ const Promotion = () => {
 
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
+  const [isSliding, setIsSliding] = useState<boolean>(false);
   const activateTimer = () => {
     //타이머
     timer = setTimeout(() => {
@@ -117,6 +118,7 @@ const Promotion = () => {
     } else {
       setState({ prev: index - 1, current: index, next: index + 1 });
     }
+    setIsSliding(false);
   };
 
   const flowUp = (onComplete: any, direction: string = "right") => {
@@ -129,14 +131,12 @@ const Promotion = () => {
       .to(elems.current[0], {
         x: d,
         opacity: 0.5,
-        onComplete,
       })
       .to(
         elems.current[1],
         {
           x: d,
           opacity: 0.5,
-          onComplete,
         },
         "-=0.75"
       )
@@ -145,7 +145,6 @@ const Promotion = () => {
         {
           x: d,
           opacity: 0.5,
-          onComplete,
         },
         "-=0.75"
       )
@@ -154,7 +153,6 @@ const Promotion = () => {
         {
           x: d,
           opacity: 0.5,
-          onComplete,
         },
         "-=0.75"
       )
@@ -190,19 +188,28 @@ const Promotion = () => {
   };
 
   const handleRight = () => {
-    clearTimeout(timer);
-    setUserDetected(true);
-    flowUp(() => calculateIndexs(state.next));
+    if (!isSliding) {
+      setIsSliding(true);
+      clearTimeout(timer);
+      setUserDetected(true);
+      flowUp(() => calculateIndexs(state.next));
+    }
   };
+
   const handleLeft = () => {
-    clearTimeout(timer);
-    setUserDetected(true);
-    flowUp(() => calculateIndexs(state.prev), "left");
+    if (!isSliding) {
+      setIsSliding(true);
+      clearTimeout(timer);
+      setUserDetected(true);
+      flowUp(() => calculateIndexs(state.prev), "left");
+    }
   };
+
   const stepForward = () => {
     setUserDetected(false);
     flowUp(() => calculateIndexs(state.next));
   };
+
   useLayoutEffect(() => {
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
