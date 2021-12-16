@@ -1,11 +1,8 @@
-import {
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
+import { usePromotionContext } from "../Main";
 
 export const SCALE_XL = 3.5; //xl : 3.5
 export const SLIDE_ITEM_WIDTH = 950;
@@ -113,10 +110,14 @@ const Promotion = () => {
     paused: true,
   });
 
+  const promotionRef = createRef<HTMLDivElement>();
+  //   const q = gsap.utils.selector(promotionRef);
+
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
   const [playState, setPlayState] = useState<boolean>(true);
+  const { isPromotionOpen, setIsPromotionOpen } = usePromotionContext();
 
   const activateTimer = () => {
     //타이머
@@ -246,6 +247,22 @@ const Promotion = () => {
       setPlayState(() => !playState);
     }
   };
+  useEffect(() => {
+      if(isPromotionOpen){
+        gsap.to(promotionRef.current, {
+            height: 0,
+            transition: "1s",
+          });
+      } else{
+        gsap.to(promotionRef.current, {
+            height: 600,
+            transition: "1s",
+          });
+      }
+    
+
+
+  }, [isPromotionOpen]);
 
   useLayoutEffect(() => {
     console.log("uselayoutEffect");
@@ -278,7 +295,7 @@ const Promotion = () => {
   }, [state, playState]);
 
   return (
-    <PromotionContainer>
+    <PromotionContainer ref={promotionRef}>
       <PromotionItemWrapper>
         <PromotionItem>
           <PromotionImage
