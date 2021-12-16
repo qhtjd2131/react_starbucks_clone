@@ -1,7 +1,4 @@
 import {
-  ComponentType,
-  useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -119,10 +116,7 @@ const Promotion = () => {
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
-  const [isAutoSliding, setIsAutoSliding] = useState<boolean>(false);
-  const [isChanging, setIsChanging] = useState<boolean>(false);
   const [playState, setPlayState] = useState<boolean>(true);
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
 
   const activateTimer = () => {
     //타이머
@@ -240,19 +234,6 @@ const Promotion = () => {
     flowUp(() => calculateIndexs(state.next));
   };
 
-  //   useEffect(() => {
-  //     if (isFirstRender) {
-  //       console.log("first render");
-  //       setIsFirstRender(false);
-  //     } else {
-  //       if (playState) {
-  //         console.log("in if(playstate):", playState);
-
-  //         activateTimer();
-  //       }
-  //     }
-  //   }, [playState]);
-
   const handlePlay = () => {
     clearTimeout(timer);
     console.log("clear timer");
@@ -296,7 +277,6 @@ const Promotion = () => {
     };
   }, [state, playState]);
 
-  useEffect(() => {}, []);
   return (
     <PromotionContainer>
       <PromotionItemWrapper>

@@ -1,5 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { Context, useContext, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import {
+  IpromotionContext,
+  promotionContext,
+  usePromotionContext,
+} from "../Main";
 import * as data from "./NoticeData";
 
 const NoticeWrapper = styled.div`
@@ -107,22 +112,30 @@ const RightTitle = styled.label`
 `;
 
 const RightButton = styled.button`
+  padding: 0;
+  border: none;
   width: 36px;
   height: 36px;
-  border: 2px solid black;
   background-color: #f6f5ef;
   border-radius: 50%;
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+const UpDownImage = styled.img``;
 
 const Notice = () => {
   const [noticeIndex, setNoticeIndex] = useState<number>(0);
+  const { isPromotionOpen, setIsPromotionOpen } = usePromotionContext();
+  console.log(isPromotionOpen);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setNoticeIndex((i) => {
         let result = (i + 1) % 5;
-        // console.log(result);
         return result;
       });
     }, 2500);
@@ -148,7 +161,17 @@ const Notice = () => {
       </NoticeLeft>
       <NoticeRight>
         <RightTitle>스타벅스 프로모션</RightTitle>
-        <RightButton>Y</RightButton>
+
+        <RightButton onClick={() => setIsPromotionOpen(!isPromotionOpen)}>
+          <UpDownImage
+            src={
+              isPromotionOpen
+                ? "https://image.istarbucks.co.kr/common/img/common/btn_prom_up.png"
+                : "https://image.istarbucks.co.kr/common/img/common/btn_prom_down.png"
+            }
+            alt=""
+          />
+        </RightButton>
       </NoticeRight>
     </NoticeWrapper>
   );
