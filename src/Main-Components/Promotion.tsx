@@ -110,7 +110,7 @@ const Promotion = () => {
   let timer: any = null;
   let timeline = gsap.timeline({
     defaults: {
-      duration: 0.75,
+      duration: 0.5,
       ease: "power3.inOut",
     },
     paused: true,
@@ -119,6 +119,7 @@ const Promotion = () => {
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
+  const [isAutoSliding, setIsAutoSliding] = useState<boolean>(false);
   const [isChanging, setIsChanging] = useState<boolean>(false);
   const [playState, setPlayState] = useState<boolean>(true);
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
@@ -141,7 +142,6 @@ const Promotion = () => {
       setState({ prev: index - 1, current: index, next: index + 1 });
     }
     setIsSliding(false);
-    setIsChanging(false);
   };
 
   const flowUp = (
@@ -150,7 +150,8 @@ const Promotion = () => {
     repeat: number = 1
   ) => {
     console.log("flowUp Function excuted!");
-    console.log("flowUp(playstate):", playState);
+    setIsSliding(true);
+
     let number_d: number = -100 * repeat;
 
     if (direction === "left") {
@@ -170,7 +171,7 @@ const Promotion = () => {
           x: d,
           opacity: 0.5,
         },
-        "-=0.75"
+        "-=0.5"
       )
       .to(
         elems.current[2],
@@ -178,7 +179,7 @@ const Promotion = () => {
           x: d,
           opacity: 0.5,
         },
-        "-=0.75"
+        "-=0.5"
       )
       .to(
         elems.current[3],
@@ -186,7 +187,7 @@ const Promotion = () => {
           x: d,
           opacity: 0.5,
         },
-        "-=0.75"
+        "-=0.5"
       )
       .to(
         elems.current[4],
@@ -195,15 +196,14 @@ const Promotion = () => {
           opacity: 0.5,
           onComplete,
         },
-        "-=0.75"
+        "-=0.5"
       )
       .play();
   };
 
   const handleChange = (index: number) => {
-    if (!isChanging) {
+    if (!isSliding) {
       if (index !== state.current) {
-        setIsChanging(true);
         clearTimeout(timer);
         setUserDetected(true);
         const result: number = state.current - index;
@@ -220,7 +220,6 @@ const Promotion = () => {
 
   const handleRight = () => {
     if (!isSliding) {
-      setIsSliding(true);
       clearTimeout(timer);
       setUserDetected(true);
       flowUp(() => calculateIndexs(state.next));
