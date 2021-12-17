@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const Reserve = () => {
+const FindStore = () => {
   return;
 };
 
-export default Reserve;
+export default FindStore;

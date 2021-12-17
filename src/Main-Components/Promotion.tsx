@@ -11,16 +11,16 @@ export const ITEM_COUNT = 5;
 //style
 const PromotionContainer = styled.div`
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: hidden;
   width: 100%;
   position: relative;
+  height: 0;
 `;
 
 const PromotionItemWrapper = styled.div`
   background-color: #f6f5ef;
   display: flex;
   padding: 30px 0px;
-
   position: relative;
   /* transform: translateX(calc(50% / ${SCALE_XL}));
   width: calc(100% * ${SCALE_XL});
@@ -30,6 +30,7 @@ const PromotionItemWrapper = styled.div`
   width: calc(${SLIDE_ITEM_WIDTH}px * ${ITEM_COUNT});
   left: 50%;
 `;
+
 const PromotionItem = styled.div`
   min-width: 0;
 `;
@@ -40,8 +41,6 @@ const PromotionImage = styled.img`
   padding: 0px 10px;
   min-width: 0;
 `;
-
-const ControllBarWrapper = styled.div``;
 
 const Stripes = styled.div`
   position: absolute;
@@ -54,22 +53,35 @@ const Stripes = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
 `;
 
 const Span = styled.span`
-  width: 60px;
-  height: 5px;
-  background-color: blue;
+  width: 6px;
+  height: 6px;
+  background-color: #acaba7;
+  border: 5px solid #acaba7;
   content: "";
   display: block;
-  border-radius: 10px;
+  border-radius: 50%;
   margin: 1rem;
   cursor: pointer;
 `;
 const PlayButton = styled.button`
   width: 30px;
   height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const PlayButtonImage = styled.img`
+  width: 12px;
+  height: 16px;
 `;
 
 const Button = styled.button`
@@ -111,12 +123,11 @@ const Promotion = () => {
   });
 
   const promotionRef = createRef<HTMLDivElement>();
-  //   const q = gsap.utils.selector(promotionRef);
 
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
-  const [playState, setPlayState] = useState<boolean>(true);
+  const [playState, setPlayState] = useState<boolean>(false);
   const { isPromotionOpen, setIsPromotionOpen } = usePromotionContext();
 
   const activateTimer = () => {
@@ -240,28 +251,36 @@ const Promotion = () => {
     console.log("clear timer");
     if (playState) {
       console.log("////stop////");
-
-      setPlayState(() => !playState);
+      pauseSlide();
     } else {
       console.log("////play////");
-      setPlayState(() => !playState);
+      playSlide();
     }
   };
+
+  const playSlide = () => {
+    setPlayState(() => !playState);
+  };
+
+  const pauseSlide = () => {
+    setPlayState(() => !playState);
+  };
   useEffect(() => {
-      if(isPromotionOpen){
-        gsap.to(promotionRef.current, {
-            height: 0,
-            transition: "1s",
-          });
-      } else{
-        gsap.to(promotionRef.current, {
-            height: 600,
-            transition: "1s",
-          });
-      }
-    
-
-
+    if (isPromotionOpen) {
+      setPlayState(true);
+      gsap.to(promotionRef.current, {
+        height: 688,
+        transition: "1s",
+        ease: "power3.inOut",
+      });
+    } else {
+      setPlayState(false);
+      gsap.to(promotionRef.current, {
+        height: 0,
+        transition: "1s",
+        ease: "power3.inOut",
+      });
+    }
   }, [isPromotionOpen]);
 
   useLayoutEffect(() => {
@@ -337,27 +356,39 @@ const Promotion = () => {
 
         <ButtonRight onClick={() => handleRight()}>{">"}</ButtonRight>
         <ButtonLeft onClick={() => handleLeft()}>{"<"}</ButtonLeft>
-      </PromotionItemWrapper>
-      <ControllBarWrapper>
+
         <Stripes>
-          <PlayButton onClick={() => handlePlay()}>=</PlayButton>
+          <PlayButton onClick={() => handlePlay()}>
+            <PlayButtonImage
+              src={
+                playState
+                  ? "https://www.starbucks.co.kr/common/img/main/main_prom_stop.png"
+                  : "https://www.starbucks.co.kr/common/img/main/main_prom_play.png"
+              }
+              alt=""
+            />
+          </PlayButton>
           {data.promotionData.map((_item, index) =>
             index === state.current ? (
               <Span
                 key={`stripe${index}`}
                 onClick={() => handleChange(index)}
-                style={{ opacity: 1 }}
+                style={{
+                  opacity: 1,
+                  border: "5px solid #067346",
+                  backgroundColor: "#f6f5ef",
+                }}
               ></Span>
             ) : (
               <Span
                 key={`stripe${index}`}
                 onClick={() => handleChange(index)}
-                style={{ opacity: 0.5 }}
+                // style={{ opacity: 0.5 }}
               ></Span>
             )
           )}
         </Stripes>
-      </ControllBarWrapper>
+      </PromotionItemWrapper>
     </PromotionContainer>
   );
 };
