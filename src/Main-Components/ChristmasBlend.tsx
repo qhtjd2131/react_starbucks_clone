@@ -43,23 +43,6 @@ const ChristmasBlend = () => {
   const mainRef = createRef<HTMLDivElement>();
   const leftRef = createRef<HTMLImageElement>();
   const rightRef = createRef<HTMLDivElement>();
-  const a = gsap.timeline;
-
-  //   useEffect(() => {
-  //     gsap.fromTo(
-  //       leftRef.current,
-  //       { x: 0 },
-  //       {
-  //         scrollTrigger: {
-  //           trigger: leftRef.current,
-  //           start: "top",
-  //           markers : true,
-  //         },
-  //         x: 400,
-  //         duration: 1,
-  //       }
-  //     );
-  //   }, []);
 
   useLayoutEffect(() => {
     gsap.fromTo(

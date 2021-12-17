@@ -1,19 +1,23 @@
+import { createRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
 const PickYourFavoriteComponent = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   background-image: url("https://www.starbucks.co.kr/common/img/main/fav_prod_bg_new.jpg");
   background-repeat: no-repeat;
+  background-position: center;
   background-attachment: fixed;
   position: relative;
+  min-width: 1050px;
 `;
 
 const TextImage1 = styled.img`
   position: absolute;
-  width: 320px;
-  transform: translate(-100%, -100%);
 
   padding: 20px;
   padding-bottom: 40px;
@@ -23,9 +27,7 @@ const TextImage1 = styled.img`
 
 const TextImage2 = styled.img`
   position: absolute;
-  width: 420px;
 
-  transform: translateX(-100%);
   top: 50%;
   left: 38%;
   padding: 20px;
@@ -48,15 +50,60 @@ const MoreInfoButtonBox = styled.div`
 `;
 
 const PickYourFavorite = () => {
+  const boxRef = createRef<HTMLDivElement>();
+  const ref1 = createRef<HTMLImageElement>();
+  const ref2 = createRef<HTMLImageElement>();
+  const ref3 = createRef<HTMLImageElement>();
+
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      ref1.current,
+      { x: "-300%", y: "-100%", autoAlpha: 0 },
+      {
+        scrollTrigger: {
+          id: "aa",
+          trigger: boxRef.current,
+          start: "top center+=200",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        x: "-100%",
+        autoAlpha: 1,
+        duration: 1.5,
+      }
+    );
+  }, []);
+
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      ref2.current,
+      { x: "-300%", autoAlpha: 0 },
+      {
+        scrollTrigger: {
+          id: "aa",
+          trigger: boxRef.current,
+          start: "top center+=200",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        x: "-100%",
+        autoAlpha: 1,
+        duration: 1.5,
+      }
+    );
+  }, []);
+
   return (
-    <PickYourFavoriteComponent>
+    <PickYourFavoriteComponent ref={boxRef}>
       <TextImage1
         src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt01.png"
         alt=""
+        ref={ref1}
       />
       <TextImage2
         src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt02.png"
         alt=""
+        ref={ref2}
       />
       <MoreInfoButtonBox>
         <MoreInfoButton color="white" hoverColor="black"></MoreInfoButton>
@@ -64,6 +111,7 @@ const PickYourFavorite = () => {
       <FavImage
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_fav.png"
         alt=""
+        ref={ref3}
       />
     </PickYourFavoriteComponent>
   );
