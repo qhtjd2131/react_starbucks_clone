@@ -1,6 +1,7 @@
 import gsap from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { createRef, useEffect } from "react";
+import { url } from "inspector";
+import { createRef, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 
@@ -36,31 +37,55 @@ const BlendDescription = styled.div`
 const BlendDescriptionTextImage = styled.img`
   width: 100%;
 `;
+gsap.registerPlugin(ScrollTrigger);
 
 const ChristmasBlend = () => {
   const mainRef = createRef<HTMLDivElement>();
   const leftRef = createRef<HTMLImageElement>();
   const rightRef = createRef<HTMLDivElement>();
+  const a = gsap.timeline;
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+//   useEffect(() => {
+//     gsap.fromTo(
+//       leftRef.current,
+//       { x: 0 },
+//       {
+//         scrollTrigger: {
+//           trigger: leftRef.current,
+//           start: "top",
+//           markers : true,
+//         },
+//         x: 400,
+//         duration: 1,
+//       }
+//     );
+//   }, []);
 
-    const element = mainRef.current;
-
-    gsap.to(mainRef.current, {
-      scrollTrigger: {
-        trigger: leftRef.current,
-        toggleActions: "restart none reverse none",
-      },
-      x: 410,
-      opacity: 1,
-      duration: 2,
-    });
-    
-  });
+    useLayoutEffect(() => {
+      console.log("useeffect animation");
+      const element = mainRef.current;
+      console.log(leftRef.current);
+      gsap.fromTo(
+        leftRef.current,
+        { },
+        {
+          scrollTrigger: {
+            id: "aa",
+            trigger: leftRef.current,
+            start: "top",
+            //   toggleActions: "restart none reverse none",
+          //   toggleActions: "play none none reverse",
+            markers: true,
+          },
+          x: 410,
+          autoAlpha: 1,
+          duration: 2,
+        }
+      );
+    }, []);
 
   return (
-    <ChristmasBlendComponent ref={mainRef}>
+    <ChristmasBlendComponent ref={mainRef} id="mainId">
       <BlendImage
         className="left"
         src="https://image.istarbucks.co.kr/upload/common/img/main/2021/2021_chrsitmas_bean.png"
