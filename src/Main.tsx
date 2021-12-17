@@ -6,6 +6,7 @@ import Promotion from "./Main-Components/Promotion";
 import Rewards from "./Main-Components/Rewards";
 import React, { useState, createContext, useContext } from "react";
 import ReserveMerry from "./Main-Components/ReserveMerry";
+import PickYourFavorite from "./Main-Components/PickYourFavorite";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const Main = () => {
       <Rewards />
       <ChristmasBlend />
       <ReserveMerry />
+      <PickYourFavorite />
       
     </MainWrapper>
 

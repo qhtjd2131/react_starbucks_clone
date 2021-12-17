@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MoreInfoButton from "./MoreInfoButton";
 
 const ChristmasBlendComponent = styled.div`
   background-image: url("https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_bean_bg.jpg");
@@ -33,24 +34,6 @@ const BlendDescriptionTextImage = styled.img`
   width: 100%;
 `;
 
-const BlendDescriptionButton = styled.button`
-  background-color: transparent;
-  border: 2px solid black;
-  border-radius: 8px;
-  font-size: 16px;
-  width: 130px;
-  padding: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  transition : 0.6s ease-in-out;
-
- &:hover{
-     color : white;
-     background-color : black;
-     text-decoration : underline;
- }
-`;
-
 const ChristmasBlend = () => {
   return (
     <ChristmasBlendComponent>
@@ -63,7 +46,7 @@ const ChristmasBlend = () => {
           src="https://image.istarbucks.co.kr/upload/common/img/main/2021/2021_chrsitmas_bean_txt.png"
           alt=""
         />
-        <BlendDescriptionButton>자세히 보기</BlendDescriptionButton>
+        <MoreInfoButton color="black" />
       </BlendDescription>
     </ChristmasBlendComponent>
   );
