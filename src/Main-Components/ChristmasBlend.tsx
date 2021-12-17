@@ -45,44 +45,59 @@ const ChristmasBlend = () => {
   const rightRef = createRef<HTMLDivElement>();
   const a = gsap.timeline;
 
-//   useEffect(() => {
-//     gsap.fromTo(
-//       leftRef.current,
-//       { x: 0 },
-//       {
-//         scrollTrigger: {
-//           trigger: leftRef.current,
-//           start: "top",
-//           markers : true,
-//         },
-//         x: 400,
-//         duration: 1,
-//       }
-//     );
-//   }, []);
+  //   useEffect(() => {
+  //     gsap.fromTo(
+  //       leftRef.current,
+  //       { x: 0 },
+  //       {
+  //         scrollTrigger: {
+  //           trigger: leftRef.current,
+  //           start: "top",
+  //           markers : true,
+  //         },
+  //         x: 400,
+  //         duration: 1,
+  //       }
+  //     );
+  //   }, []);
 
-    useLayoutEffect(() => {
-      console.log("useeffect animation");
-      const element = mainRef.current;
-      console.log(leftRef.current);
-      gsap.fromTo(
-        leftRef.current,
-        { },
-        {
-          scrollTrigger: {
-            id: "aa",
-            trigger: leftRef.current,
-            start: "top",
-            //   toggleActions: "restart none reverse none",
-          //   toggleActions: "play none none reverse",
-            markers: true,
-          },
-          x: 410,
-          autoAlpha: 1,
-          duration: 2,
-        }
-      );
-    }, []);
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      leftRef.current,
+      { x: -1000, autoAlpha: 0 },
+      {
+        scrollTrigger: {
+          id: "aa",
+          trigger: leftRef.current,
+          start: "top center+=200",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        x: 0,
+        autoAlpha: 1,
+        duration: 1.5,
+      }
+    );
+  }, []);
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      rightRef.current,
+      { x: 1000, autoAlpha: 0 },
+      {
+        scrollTrigger: {
+          id: "aa",
+          trigger: leftRef.current,
+          start: "top center+=200",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        x: 0,
+        autoAlpha: 1,
+        duration: 1.5,
+      }
+    );
+  }, []);
+
 
   return (
     <ChristmasBlendComponent ref={mainRef} id="mainId">
