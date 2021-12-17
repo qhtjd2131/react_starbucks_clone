@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 const MoreInfoButtonComponent = styled.button<IMoreInfoButton>`
   width: 144px;
   height: 42px;
-  margin-left: 60px;
   color: ${(props) => props.color};
   background-color: transparent;
   border: 2px solid ${(props) => props.color};
