@@ -4,7 +4,7 @@ import InnerNav from "./Header-Components/InnerNav";
 import Logo from "./Header-Components/Logo";
 import UtilNav from "./Header-Components/UtilNav";
 
-const HeaderWrapper = styled.div`
+const HeaderBox = styled.div`
   width: 100%;
   height: 120px;
   box-sizing : border-box;
@@ -18,12 +18,12 @@ const HeaderWrapper = styled.div`
 
 const Header = () => {
   return (
-    <HeaderWrapper>
+    <HeaderBox>
       <Logo />
       <UtilNav />
 
       <InnerNav />
-    </HeaderWrapper>
+    </HeaderBox>
   );
 };
 
