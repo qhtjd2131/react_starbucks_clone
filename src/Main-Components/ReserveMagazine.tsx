@@ -15,6 +15,7 @@ const ReserveMagazineBox = styled.div`
   background-origin: initial;
   background-clip: initial;
   background-color: initial;
+
   position: relative;
 `;
 
