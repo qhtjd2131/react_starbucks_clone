@@ -1,8 +1,8 @@
-import { createRef } from "react";
+import { createRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 
 const ReserveMagazineBox = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ const ReserveMagazineBox = styled.div`
   background-origin: initial;
   background-clip: initial;
   background-color: initial;
-  position : relative;
+  position: relative;
 `;
 
 const ReserveMagazineTitle = styled.div`
@@ -33,13 +33,53 @@ const TitleImage = styled.img`
 `;
 
 const MoreInfoButtonWrapper = styled.div`
-    
+  position: relative;
+  padding-top: 20px;
+  padding-left: 255px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 `;
 
-const ReserveMagazineVisual = styled.img``;
+const ReserveMagazineVisual = styled.img`
+  display: block;
+  position: absolute;
+  bottom: auto;
+  opacity: 0;
+  top: 0;
+  right: 50%;
+  margin-right: -483px;
+`;
 
 const ReserveMagazine = () => {
   const visualRef = createRef<HTMLImageElement>();
+  ScrollTrigger.refresh();
+
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      visualRef.current,
+      {
+        autoAlpha: 0,
+        duration: 1,
+      },
+      {
+        scrollTrigger: {
+          id: "reserve-magazine--------------------",
+          trigger: visualRef.current,
+          start: "top center+=200",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        autoAlpha: 1,
+      }
+    );
+
+    setTimeout(() => {
+      // ScrollTrigger.refresh()
+    }, 2000);
+    return () => {};
+  }, []);
   return (
     <ReserveMagazineBox>
       <ReserveMagazineTitle>

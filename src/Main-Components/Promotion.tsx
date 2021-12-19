@@ -3,6 +3,7 @@ import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
 import { usePromotionContext } from "../Main";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const SCALE_XL = 3.5; //xl : 3.5
 export const SLIDE_ITEM_WIDTH = 950;
@@ -270,15 +271,21 @@ const Promotion = () => {
       setPlayState(true);
       gsap.to(promotionRef.current, {
         height: 688,
-        transition: "1s",
+        duration : 1,
         ease: "power3.inOut",
+        onComplete: () => {
+          ScrollTrigger.refresh();
+        },
       });
     } else {
       setPlayState(false);
       gsap.to(promotionRef.current, {
         height: 0,
-        transition: "1s",
+        duration : 1,
         ease: "power3.inOut",
+        onComplete: () => {
+          ScrollTrigger.refresh();
+        },
       });
     }
   }, [isPromotionOpen]);

@@ -1,5 +1,4 @@
 import gsap from "gsap/all";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { url } from "inspector";
 import { createRef, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
@@ -37,7 +36,6 @@ const BlendDescription = styled.div`
 const BlendDescriptionTextImage = styled.img`
   width: 100%;
 `;
-gsap.registerPlugin(ScrollTrigger);
 
 const ChristmasBlend = () => {
   const mainRef = createRef<HTMLDivElement>();
