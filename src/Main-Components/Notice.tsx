@@ -9,7 +9,6 @@ import * as data from "./NoticeData";
 
 const NoticeWrapper = styled.div`
   display: flex;
-
   width: 100%;
   height: 66px;
   font-size: 18px;

@@ -10,6 +10,7 @@ const ChristmasBlendComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width:100%;
   padding: 100px 20px;
 `;
 

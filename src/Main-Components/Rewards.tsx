@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const RewardsComponent = styled.div`
+width: 100%;
   background-color: #1e3932;
   display: flex;
   justify-content: center;

@@ -7,13 +7,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PickYourFavoriteComponent = styled.div`
   width: 100%;
-  height: 120vh;
+  height: 800px;
   background-image: url("https://www.starbucks.co.kr/common/img/main/fav_prod_bg_new.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-size: cover;
   position: relative;
   min-width: 1050px;
+`;
+const InnerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  max-width: 1280px;
 `;
 
 const TextImage1 = styled.img`
@@ -95,24 +102,26 @@ const PickYourFavorite = () => {
 
   return (
     <PickYourFavoriteComponent ref={boxRef}>
-      <TextImage1
-        src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt01.png"
-        alt=""
-        ref={ref1}
-      />
-      <TextImage2
-        src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt02.png"
-        alt=""
-        ref={ref2}
-      />
-      <MoreInfoButtonBox>
-        <MoreInfoButton color="white" hoverColor="black"></MoreInfoButton>
-      </MoreInfoButtonBox>
-      <FavImage
-        src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_fav.png"
-        alt=""
-        ref={ref3}
-      />
+      <InnerWrapper>
+        <TextImage1
+          src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt01.png"
+          alt=""
+          ref={ref1}
+        />
+        <TextImage2
+          src="https://www.starbucks.co.kr/common/img/main/fav_prod_txt02.png"
+          alt=""
+          ref={ref2}
+        />
+        <MoreInfoButtonBox>
+          <MoreInfoButton color="white" hoverColor="black"></MoreInfoButton>
+        </MoreInfoButtonBox>
+        <FavImage
+          src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_fav.png"
+          alt=""
+          ref={ref3}
+        />
+      </InnerWrapper>
     </PickYourFavoriteComponent>
   );
 };

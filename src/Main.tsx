@@ -13,6 +13,8 @@ import FindStore from "./Main-Components/FindStore";
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content : center;
+  align-items : center;
   width: 100%;
 `;
 
