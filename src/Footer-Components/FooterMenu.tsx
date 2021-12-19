@@ -20,10 +20,10 @@ const ItemBox = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  align-items: flex-start;
 `;
 const Title = styled.ul`
   margin: 12px 0px;
-
   list-style: none;
   font-weight: 400;
   font-size: 16px;
@@ -34,9 +34,16 @@ const Title = styled.ul`
 `;
 
 const List = styled.li`
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const SubTitle = styled.div`
+  width: auto;
   margin: 6px 0px;
   font-size: 12px;
-  list-style: none;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -55,7 +62,9 @@ const FooterAwards = () => {
           <ItemBox key={index}>
             <Title> {data.footerMenuData[_key].name} </Title>
             {data.footerMenuData[_key].values.map((i: data.Ivalue) => (
-              <List>{i.title}</List>
+              <List>
+                <SubTitle>{i.title}</SubTitle>
+              </List>
             ))}
           </ItemBox>
         ))}
