@@ -69,7 +69,7 @@ const ReserveMagazine = () => {
           trigger: visualRef.current,
           start: "top center+=200",
           toggleActions: "play none none reverse",
-          markers: true,
+          markers: false,
         },
         autoAlpha: 1,
       }
