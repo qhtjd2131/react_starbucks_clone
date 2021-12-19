@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FooterAwards from "./Footer-Components/FooterAwards";
+import FooterCopyright from "./Footer-Components/FooterCopyright";
 import FooterMenu from "./Footer-Components/FooterMenu";
 
 const FooterBox = styled.section`
@@ -15,6 +16,7 @@ const Footer = () => {
     <FooterBox>
       <FooterMenu />
       <FooterAwards />
+      <FooterCopyright />
     </FooterBox>
   );
 };

@@ -3,13 +3,14 @@ import styled from "styled-components";
 const FooterAwardsBox = styled.section`
   width: 100%;
   background-color: #282828;
-  height: 300px;
 `;
 
 const InnerWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  box-sizing: border-box;
+  padding: 0px 60px;
   @media only screen and (max-width: 1180px) {
     grid-template-columns: repeat(3, 1fr);
   }
