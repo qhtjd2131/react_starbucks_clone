@@ -75,9 +75,6 @@ const ReserveMagazine = () => {
       }
     );
 
-    setTimeout(() => {
-      // ScrollTrigger.refresh()
-    }, 2000);
     return () => {};
   }, []);
   return (

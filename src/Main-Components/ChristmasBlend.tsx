@@ -52,7 +52,7 @@ const ChristmasBlend = () => {
           trigger: leftRef.current,
           start: "top center+=200",
           toggleActions: "play none none reverse",
-          markers: false,
+          markers : false,
         },
         x: 0,
         autoAlpha: 1,

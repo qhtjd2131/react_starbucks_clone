@@ -99,6 +99,14 @@ npm run start
 ### 1. 버튼 부가 설명 컴포넌트
 
 
+### 2. scrollTrigger 
+
+scrollTrigger 기능이 동작하지않는 문제를 해결.
+구글링 중 동일한 문제를 겪었지만, 해결책이 제시되지 않은 게시물 발견.
+https://greensock.com/forums/topic/24456-markers-and-scrolltrigger-not-working/
+
+회원가입하여 해결책 제시!
+
 ---
 
 ## 이번 프로젝트를 하면서..
