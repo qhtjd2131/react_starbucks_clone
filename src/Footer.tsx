@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import FooterMenu from "./Footer-Components/FooterAwards";
-import FooterAwards from "./Footer-Components/FooterMenu";
+import FooterAwards from "./Footer-Components/FooterAwards";
+import FooterMenu from "./Footer-Components/FooterMenu";
 
 const FooterBox = styled.section`
   width: 100%;
@@ -13,7 +13,6 @@ const FooterBox = styled.section`
 const Footer = () => {
   return (
     <FooterBox>
-      FOOTER
       <FooterMenu />
       <FooterAwards />
     </FooterBox>

@@ -12,8 +12,13 @@ const InnerWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   box-sizing: border-box;
-  padding: 40px 80px;
+  padding: 40px 60px;
   padding-bottom: 60px;
+  min-width: 760px;
+
+  @media only screen and (max-width: 1180px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const ItemBox = styled.div`
