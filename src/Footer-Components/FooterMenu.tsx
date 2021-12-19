@@ -4,6 +4,7 @@ import * as data from "./FooterMenuData";
 const FooterAwardsBox = styled.section`
   width: 100%;
   background-color: #2c2a29;
+  position: relative;
 `;
 
 const InnerWrapper = styled.div`
@@ -41,7 +42,11 @@ const List = styled.li`
     text-decoration: underline;
   }
 `;
-
+const FooterLogo = styled.img`
+  position: absolute;
+  top: 40px;
+  right: 10%;
+`;
 const FooterAwards = () => {
   return (
     <FooterAwardsBox>
@@ -55,6 +60,7 @@ const FooterAwards = () => {
           </ItemBox>
         ))}
       </InnerWrapper>
+      <FooterLogo src="/images/footer_logo.png" alt="" />
     </FooterAwardsBox>
   );
 };
