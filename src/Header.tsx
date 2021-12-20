@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import InnerNav from "./Header-Components/InnerNav";
 import Logo from "./Header-Components/Logo";

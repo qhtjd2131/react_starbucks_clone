@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import * as data from "./InnerNavData";
 import InnerNavDropDown from "./InnerNavDropDown";
@@ -37,26 +37,24 @@ const InnerNav = () => {
     <InnerNavComponent>
       <InnerNavItemWrapper>
         {Object.keys(data.innerNavItems).map((key: string, index: number) => (
-          <>
-            <InnerNavItem
-              key={index}
-              onMouseEnter={() => {
-                setSelectedInnerNavItem(key);
-              }}
-              onMouseLeave={() => {
-                setSelectedInnerNavItem(null);
-              }}
-            >
-              {data.innerNavItems[key].title}
+          <InnerNavItem
+            key={index}
+            onMouseEnter={() => {
+              setSelectedInnerNavItem(key);
+            }}
+            onMouseLeave={() => {
+              setSelectedInnerNavItem(null);
+            }}
+          >
+            {data.innerNavItems[key].title}
 
-              <InnerNavDropDown
-                dropdown={data.innerNavItems[key].dropdown}
-                bottom = {data.innerNavItems[key].bottom}
-                selectedInnerNavItem={selectedInnerNavItem}
-                innerNavItem={key}
-              />
-            </InnerNavItem>
-          </>
+            <InnerNavDropDown
+              dropdown={data.innerNavItems[key].dropdown}
+              bottom={data.innerNavItems[key].bottom}
+              selectedInnerNavItem={selectedInnerNavItem}
+              innerNavItem={key}
+            />
+          </InnerNavItem>
         ))}
       </InnerNavItemWrapper>
     </InnerNavComponent>

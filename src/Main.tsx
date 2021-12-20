@@ -4,7 +4,7 @@ import MainItem1 from "./Main-Components/MainItem";
 import Notice from "./Main-Components/Notice";
 import Promotion from "./Main-Components/Promotion";
 import Rewards from "./Main-Components/Rewards";
-import React, { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import ReserveMerry from "./Main-Components/ReserveMerry";
 import PickYourFavorite from "./Main-Components/PickYourFavorite";
 import ReserveMagazine from "./Main-Components/ReserveMagazine";

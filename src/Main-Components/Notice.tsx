@@ -1,8 +1,6 @@
-import React, { Context, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import {
-  IpromotionContext,
-  promotionContext,
   usePromotionContext,
 } from "../Main";
 import * as data from "./NoticeData";

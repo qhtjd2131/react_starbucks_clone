@@ -1,6 +1,5 @@
 import gsap from "gsap/all";
-import { url } from "inspector";
-import { createRef, useEffect, useLayoutEffect } from "react";
+import { createRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 

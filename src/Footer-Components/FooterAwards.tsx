@@ -5,7 +5,7 @@ const FooterAwardsBox = styled.section`
   background-color: #282828;
 `;
 
-const InnerWrapper = styled.div`
+const InnerWrapper2 = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -33,7 +33,7 @@ const image_src = [
 const FooterAwards = () => {
   return (
     <FooterAwardsBox>
-      <InnerWrapper>
+      <InnerWrapper2>
         {image_src.map((src, index) => (
           <AwardItems key={index}>
             <Item>
@@ -41,7 +41,7 @@ const FooterAwards = () => {
             </Item>
           </AwardItems>
         ))}
-      </InnerWrapper>
+      </InnerWrapper2>
     </FooterAwardsBox>
   );
 };

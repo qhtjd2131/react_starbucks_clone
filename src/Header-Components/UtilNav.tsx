@@ -1,8 +1,7 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useState } from "react";
 import styled, { css } from "styled-components";
 import * as data from "./UtilNavData";
 import { AiOutlineSearch } from "react-icons/ai";
-import { gsap } from "gsap";
 
 const UtilNavComponent = styled.div`
   /* height: 45%; */
@@ -80,14 +79,6 @@ interface ISearchIconWrapperProps {
 const UtilNavItems = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const searchButtonRef: React.RefObject<HTMLInputElement> = createRef();
-
-  //   useEffect(() => {
-  //     gsap.to(searchButtonRef.current, {
-  //       rotation: "+=360",
-  //       x: -100,
-
-  //     });
-  //   });
 
   const search = () => {
     console.log("search");

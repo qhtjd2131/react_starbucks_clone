@@ -1,7 +1,6 @@
 import { createRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 
 const ReserveMagazineBox = styled.div`
@@ -55,9 +54,10 @@ const ReserveMagazineVisual = styled.img`
 
 const ReserveMagazine = () => {
   const visualRef = createRef<HTMLImageElement>();
-  ScrollTrigger.refresh();
 
   useLayoutEffect(() => {
+    console.log("11");
+  
     gsap.fromTo(
       visualRef.current,
       {
@@ -75,8 +75,6 @@ const ReserveMagazine = () => {
         autoAlpha: 1,
       }
     );
-
-    return () => {};
   }, []);
   return (
     <ReserveMagazineBox>

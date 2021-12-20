@@ -30,19 +30,6 @@ const ReserveMerryImage = styled.img`
   height: 30%;
 `;
 
-const ReserveMerryMoreInfoButton = styled.button`
-  width: 144px;
-  height: 42px;
-  margin-left: 60px;
-  color: #d5a012;
-  background-color: transparent;
-  border: 2px solid #d5a012;
-  border-radius: 8px;
-
-  font-size : 16px;
-  font-weight : 700;
-`;
-
 const ReserveMerry = () => {
   return (
     <ReserveMerryComponent>

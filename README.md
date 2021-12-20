@@ -139,6 +139,13 @@ Timeout type 은 console로 출력하면 number type으로 나오는듯이 자�
 참고 :(typescript non-null-assertion-operator) https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator
 이 기능은 해당하는 값이 null 이 아니고 정의되지 않은 값이라고 컴파일러에게 알려준다. 따라서 null type을 해당 경우에서 제외 시키고, 오류를 해결할 수 있다.
 
+
+
+
+animation 을 위해 사용한 useEffect() 에서 발생한 missing dependency warning.
+의도적으로 의존성배열에 빈배열을 넣었지만, warning이 발생하는것을 없앨 수 있을까?
+
+-> useEffect를 componentDidMount() 처럼 사용하려고하면 안된다? 
 ---
 
 ## 이번 프로젝트를 하면서..

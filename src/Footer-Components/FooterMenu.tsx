@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as data from "./FooterMenuData";
 
-const FooterAwardsBox = styled.section`
+const FooterMenuBox = styled.section`
   width: 100%;
   background-color: #2c2a29;
   position: relative;
@@ -59,15 +59,15 @@ const FooterLogo = styled.img`
   top: 40px;
   right: 10%;
 `;
-const FooterAwards = () => {
+const FooterMenu = () => {
   return (
-    <FooterAwardsBox>
+    <FooterMenuBox>
       <InnerWrapper>
         {Object.keys(data.footerMenuData).map((_key: string, index: number) => (
           <ItemBox key={index}>
             <Title> {data.footerMenuData[_key].name} </Title>
-            {data.footerMenuData[_key].values.map((i: data.Ivalue) => (
-              <List>
+            {data.footerMenuData[_key].values.map((i: data.Ivalue, index) => (
+              <List key={index}>
                 <SubTitle>{i.title}</SubTitle>
               </List>
             ))}
@@ -75,8 +75,8 @@ const FooterAwards = () => {
         ))}
       </InnerWrapper>
       <FooterLogo src="/images/footer_logo.png" alt="" />
-    </FooterAwardsBox>
+    </FooterMenuBox>
   );
 };
 
-export default FooterAwards;
+export default FooterMenu;
