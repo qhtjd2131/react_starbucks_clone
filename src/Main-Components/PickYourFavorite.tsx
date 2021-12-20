@@ -15,6 +15,10 @@ const PickYourFavoriteComponent = styled.div`
   background-size: cover;
   position: relative;
   min-width: 1050px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
 `;
 const InnerWrapper = styled.div`
   width: 100%;

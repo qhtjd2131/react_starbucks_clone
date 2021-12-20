@@ -125,7 +125,6 @@ interface Istate {
   next: number;
 }
 
-
 const Promotion = () => {
   let elems = useRef<HTMLImageElement[]>([]);
   let timer: ReturnType<typeof setTimeout> | null = null;
@@ -170,7 +169,6 @@ const Promotion = () => {
     direction: "left" | "right" = "right",
     repeat: number = 1
   ) => {
-    console.log("flowUp Function excuted!");
     setIsSliding(true);
 
     let number_d: number = -100 * repeat;
@@ -220,8 +218,6 @@ const Promotion = () => {
         "-=0.5"
       )
       .play();
-    console.log("elems:", elems);
-    console.log(typeof elems);
   };
 
   const handleChange = (index: number) => {
@@ -267,13 +263,10 @@ const Promotion = () => {
     if (timer) {
       clearTimeout(timer);
     }
-    console.log("clear timer");
     if (playState) {
-      console.log("////stop////");
       pauseSlide();
     } else {
-      console.log("////play////");
-      playSlide();
+      playSlide(); //paly
     }
   };
 
@@ -309,7 +302,6 @@ const Promotion = () => {
   }, [isPromotionOpen]);
 
   useLayoutEffect(() => {
-    console.log("uselayoutEffect");
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
     const image3 = !!elems.current[2] && elems.current[2];
@@ -318,7 +310,6 @@ const Promotion = () => {
 
     if (playState) {
       activateTimer(); //moving item
-      console.log("activateTimer");
     }
     gsap.set(image2, { x: "0%", opacity: 1 });
     if (userDetected) {

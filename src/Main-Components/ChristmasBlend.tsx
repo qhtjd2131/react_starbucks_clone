@@ -10,12 +10,13 @@ const ChristmasBlendComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width:100%;
+  width: 100%;
   padding: 100px 20px;
 `;
 
 const BlendImage = styled.img`
   width: 40%;
+  max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +29,7 @@ const BlendDescription = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 40%;
+  max-width: 800px;
 
   padding: 20px;
   box-sizing: border-box;
@@ -53,7 +55,7 @@ const ChristmasBlend = () => {
           trigger: leftRef.current,
           start: "top center+=200",
           toggleActions: "play none none reverse",
-          markers : false,
+          markers: false,
         },
         x: 0,
         autoAlpha: 1,
@@ -79,7 +81,6 @@ const ChristmasBlend = () => {
       }
     );
   }, []);
-
 
   return (
     <ChristmasBlendComponent ref={mainRef} id="mainId">

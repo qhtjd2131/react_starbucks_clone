@@ -129,7 +129,6 @@ const UpDownImage = styled.img``;
 const Notice = () => {
   const [noticeIndex, setNoticeIndex] = useState<number>(0);
   const { isPromotionOpen, setIsPromotionOpen } = usePromotionContext();
-  console.log(isPromotionOpen);
 
   useEffect(() => {
     const interval = setInterval(() => {
