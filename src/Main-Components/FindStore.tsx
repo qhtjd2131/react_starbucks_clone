@@ -117,7 +117,7 @@ const FindStore = () => {
           trigger: imageRef.current,
           toggleActions: "play none none reverse",
           start: "top center+=200",
-          markers: true,
+          markers: false,
         },
         ease: "power3.inOut",
         autoAlpha: 1,
@@ -138,7 +138,7 @@ const FindStore = () => {
             trigger: imageRef.current,
             toggleActions: "play none none reverse",
             start: "top center+=200",
-            markers: true,
+            markers: false,
           },
 
           delay: 0.2 * index,

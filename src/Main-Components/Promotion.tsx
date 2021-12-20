@@ -107,6 +107,10 @@ const ButtonRight = styled(Button)`
 
 //interface
 
+interface IcalculateIndexs {
+  (index : number) : void;
+}
+
 interface Istate {
   prev: number;
   current: number;
@@ -114,7 +118,7 @@ interface Istate {
 }
 const Promotion = () => {
   let elems = useRef<any>([]);
-  let timer: any = null;
+  let timer: ReturnType<typeof setTimeout> | null = null;
   let timeline = gsap.timeline({
     defaults: {
       duration: 0.5,
@@ -129,16 +133,17 @@ const Promotion = () => {
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
   const [playState, setPlayState] = useState<boolean>(false);
-  const { isPromotionOpen, setIsPromotionOpen } = usePromotionContext();
+  const { isPromotionOpen } = usePromotionContext();
 
   const activateTimer = () => {
     //타이머
     timer = setTimeout(() => {
       stepForward();
     }, 2000);
+
   };
 
-  const calculateIndexs = (index: number) => {
+  const calculateIndexs : IcalculateIndexs = (index: number) => {
     //인덱스계산
 
     if (index === data.promotionData.length - 1) {
@@ -152,7 +157,7 @@ const Promotion = () => {
   };
 
   const flowUp = (
-    onComplete: any,
+    onComplete: IcalculateIndexs,
     direction: "left" | "right" = "right",
     repeat: number = 1
   ) => {
@@ -211,7 +216,7 @@ const Promotion = () => {
   const handleChange = (index: number) => {
     if (!isSliding) {
       if (index !== state.current) {
-        clearTimeout(timer);
+        clearTimeout(timer!);
         setUserDetected(true);
         const result: number = state.current - index;
         if (result < 0) {
@@ -227,7 +232,7 @@ const Promotion = () => {
 
   const handleRight = () => {
     if (!isSliding) {
-      clearTimeout(timer);
+      clearTimeout(timer!);
       setUserDetected(true);
       flowUp(() => calculateIndexs(state.next));
     }
@@ -236,7 +241,7 @@ const Promotion = () => {
   const handleLeft = () => {
     if (!isSliding) {
       setIsSliding(true);
-      clearTimeout(timer);
+      clearTimeout(timer!);
       setUserDetected(true);
       flowUp(() => calculateIndexs(state.prev), "left");
     }
@@ -248,7 +253,9 @@ const Promotion = () => {
   };
 
   const handlePlay = () => {
-    clearTimeout(timer);
+    if (timer) {
+      clearTimeout(timer);
+    }
     console.log("clear timer");
     if (playState) {
       console.log("////stop////");
@@ -271,7 +278,7 @@ const Promotion = () => {
       setPlayState(true);
       gsap.to(promotionRef.current, {
         height: 688,
-        duration : 1,
+        duration: 1,
         ease: "power3.inOut",
         onComplete: () => {
           ScrollTrigger.refresh();
@@ -281,7 +288,7 @@ const Promotion = () => {
       setPlayState(false);
       gsap.to(promotionRef.current, {
         height: 0,
-        duration : 1,
+        duration: 1,
         ease: "power3.inOut",
         onComplete: () => {
           ScrollTrigger.refresh();
@@ -316,7 +323,7 @@ const Promotion = () => {
     }
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer!);
     };
   }, [state, playState]);
 

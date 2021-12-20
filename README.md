@@ -107,6 +107,38 @@ https://greensock.com/forums/topic/24456-markers-and-scrolltrigger-not-working/
 
 회원가입하여 해결책 제시!
 
+
+
+setTimeout method 는 두종류가 있다.
+window.setTimeout() : 리턴타입이 number 이다.
+browser 기반 javascript 에서만 동작한다. 만약에 window 객체가 정의 되지 않는다면, 동작하지 않는다. 예를들어 server side rendering을 할 때 window 객체가 정의 되지 않으므로 동작하지 않는다.
+(https://developer.mozilla.org/ko/docs/Web/API/setTimeout)
+
+NodeJS.setTimeout() : 리턴타입이 NodeJS.Timeout 이다.
+ReturnType<typeof setTimeout> 을 이용하여 타입을 지정할 수 있다. 이렇게 한다면 플랫폼과 상관없이 기능을 동작시킬 수있다. 따라서 이 방법을 추천한다.
+(https://nodejs.org/ko/docs/guides/timers-in-node/#node-js-timers)
+
+TypeScript: TS2769
+let timer: ReturnType<typeof setTimeout> | null = null;
+clearTimeout(timer)  // error ts:2769
+
+이 호출과 일치하는 오버로드가 없습니다.
+  오버로드 1/2('(timeoutId: Timeout): void')에서 다음 오류가 발생했습니다.
+    'Timeout | null' 형식의 인수는 'Timeout' 형식의 매개 변수에 할당될 수 없습니다.
+      'null' 형식은 'Timeout' 형식에 할당할 수 없습니다.
+  오버로드 2/2('(handle?: number | undefined): void')에서 다음 오류가 발생했습니다.
+    'Timeout | null' 형식의 인수는 'number | undefined' 형식의 매개 변수에 할당될 수 없습니다.
+      'null' 형식은 'number | undefined' 형식에 할당할 수 없습니다.
+
+해당 오류는 인수의 필요타입과 실제타입이 달라서 발생하는 문제이다.
+clearTimeout의 인수는 number | undefined 타입이어야 한다.
+하지만 NodeJS.setTimeout method는 'Timeout | null' type을 가진다. 
+Timeout type 은 console로 출력하면 number type으로 나오는듯이 자동으로 변환되지만(setTimeout의 return 값의 type을 출력해보면 number 이지만, timer의 타입을 number로 지정하면 오류가 발생한다.), 초기설정값을 null로 주면서 null type이 충돌을 일으키는 것이다.
+
+이 때 발생한 오류는 type error 이기 때문에 논리적인 알고리즘으로 null 값을 피하더라도 해당 오류는 계속 된다. 그래서 typescript의 non-null-assertion-operator 을 사용해야한다.
+참고 :(typescript non-null-assertion-operator) https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator
+이 기능은 해당하는 값이 null 이 아니고 정의되지 않은 값이라고 컴파일러에게 알려준다. 따라서 null type을 해당 경우에서 제외 시키고, 오류를 해결할 수 있다.
+
 ---
 
 ## 이번 프로젝트를 하면서..
