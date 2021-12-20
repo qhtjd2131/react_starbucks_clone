@@ -9,6 +9,7 @@ const MainItemWrapper = styled.div`
   height: 700px;
   box-sizing: border-box;
   padding: 20px;
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
 `;
@@ -128,7 +129,6 @@ const MainItem1 = () => {
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink2.png"
         alt=""
-
         topPercent="20"
         leftPercent="43"
         width="32"
@@ -140,7 +140,6 @@ const MainItem1 = () => {
       <CoffeeItem
         src="https://image.istarbucks.co.kr/img/event/2021/2021_christmas2_drink3.png"
         alt=""
-
         topPercent="15"
         leftPercent="65"
         width="39"

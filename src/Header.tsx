@@ -10,10 +10,13 @@ const HeaderBox = styled.div`
   box-sizing : border-box;
   top: 0;
   background-color: #f6f5ef;
-  position : relative;
+  position : fixed;
+  top : 0;
+  left : 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  z-index : 999;
 `;
 
 const Header = () => {
