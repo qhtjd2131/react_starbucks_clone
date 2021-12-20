@@ -1,4 +1,12 @@
-import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  createRef,
+  MutableRefObject,
+  RefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import gsap from "gsap";
 import styled from "styled-components";
 import * as data from "./PromotionData";
@@ -108,7 +116,7 @@ const ButtonRight = styled(Button)`
 //interface
 
 interface IcalculateIndexs {
-  (index : number) : void;
+  (index: number): void;
 }
 
 interface Istate {
@@ -116,8 +124,10 @@ interface Istate {
   current: number;
   next: number;
 }
+
+
 const Promotion = () => {
-  let elems = useRef<any>([]);
+  let elems = useRef<HTMLImageElement[]>([]);
   let timer: ReturnType<typeof setTimeout> | null = null;
   let timeline = gsap.timeline({
     defaults: {
@@ -140,10 +150,9 @@ const Promotion = () => {
     timer = setTimeout(() => {
       stepForward();
     }, 2000);
-
   };
 
-  const calculateIndexs : IcalculateIndexs = (index: number) => {
+  const calculateIndexs: IcalculateIndexs = (index: number) => {
     //인덱스계산
 
     if (index === data.promotionData.length - 1) {
@@ -211,6 +220,8 @@ const Promotion = () => {
         "-=0.5"
       )
       .play();
+    console.log("elems:", elems);
+    console.log(typeof elems);
   };
 
   const handleChange = (index: number) => {
@@ -332,14 +343,14 @@ const Promotion = () => {
       <PromotionItemWrapper>
         <PromotionItem>
           <PromotionImage
-            ref={(elem) => (elems.current[4] = elem)}
+            ref={(elem) => (elems.current[4] = elem!)}
             src={data.promotionData[state.next].imgSrc}
             alt=""
           />
         </PromotionItem>
         <PromotionItem>
           <PromotionImage
-            ref={(elem) => (elems.current[0] = elem)}
+            ref={(elem) => (elems!.current[0]! = elem!)}
             src={data.promotionData[state.prev].imgSrc}
             alt=""
           />
@@ -347,7 +358,7 @@ const Promotion = () => {
 
         <PromotionItem>
           <PromotionImage
-            ref={(elem) => (elems.current[1] = elem)}
+            ref={(elem) => (elems.current![1] = elem!)}
             src={data.promotionData[state.current].imgSrc}
             alt=""
           />
@@ -355,14 +366,14 @@ const Promotion = () => {
 
         <PromotionItem>
           <PromotionImage
-            ref={(elem) => (elems.current[2] = elem)}
+            ref={(elem) => (elems.current[2] = elem!)}
             src={data.promotionData[state.next].imgSrc}
             alt=""
           />
         </PromotionItem>
         <PromotionItem>
           <PromotionImage
-            ref={(elem) => (elems.current[3] = elem)}
+            ref={(elem) => (elems.current[3] = elem!)}
             src={data.promotionData[state.prev].imgSrc}
             alt=""
           />
