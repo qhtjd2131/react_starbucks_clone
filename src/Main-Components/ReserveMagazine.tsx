@@ -56,10 +56,7 @@ const ReserveMagazine = () => {
   const visualRef = useRef<HTMLImageElement>(null);
   // const visualRef = createRef<HTMLImageElement>();
 
-
-  useLayoutEffect(() => {
-    console.log("11");
-  
+  useLayoutEffect(() => {  
     gsap.fromTo(
       visualRef.current,
       {
