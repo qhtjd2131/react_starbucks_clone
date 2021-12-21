@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import gsap from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -97,12 +97,12 @@ const FindButton = styled.button`
 `;
 
 const FindStore = () => {
-  const imageRef = createRef<HTMLImageElement>();
-  const decoImage1Ref = createRef<HTMLImageElement>();
-  const decoImage2Ref = createRef<HTMLImageElement>();
-  const Text1Ref = createRef<HTMLImageElement>();
-  const Text2Ref = createRef<HTMLImageElement>();
-  const buttonRef = createRef<HTMLButtonElement>();
+  const imageRef = useRef<HTMLImageElement>(null);
+  const decoImage1Ref = useRef<HTMLImageElement>(null);
+  const decoImage2Ref = useRef<HTMLImageElement>(null);
+  const Text1Ref = useRef<HTMLImageElement>(null);
+  const Text2Ref = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useLayoutEffect(() => {
     gsap.fromTo(

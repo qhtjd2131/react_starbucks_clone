@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 import gsap from "gsap";
@@ -61,10 +61,10 @@ const MoreInfoButtonBox = styled.div`
 `;
 
 const PickYourFavorite = () => {
-  const boxRef = createRef<HTMLDivElement>();
-  const ref1 = createRef<HTMLImageElement>();
-  const ref2 = createRef<HTMLImageElement>();
-  const ref3 = createRef<HTMLImageElement>();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const ref1 = useRef<HTMLImageElement>(null);
+  const ref2 = useRef<HTMLImageElement>(null);
+  const ref3 = useRef<HTMLImageElement>(null);
 
   useLayoutEffect(() => {
     gsap.fromTo(

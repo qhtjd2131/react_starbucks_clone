@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 import gsap from "gsap";
@@ -53,7 +53,9 @@ const ReserveMagazineVisual = styled.img`
 `;
 
 const ReserveMagazine = () => {
-  const visualRef = createRef<HTMLImageElement>();
+  const visualRef = useRef<HTMLImageElement>(null);
+  // const visualRef = createRef<HTMLImageElement>();
+
 
   useLayoutEffect(() => {
     console.log("11");

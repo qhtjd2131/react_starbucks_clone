@@ -1,5 +1,5 @@
 import gsap from "gsap/all";
-import { createRef, useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 
@@ -40,9 +40,9 @@ const BlendDescriptionTextImage = styled.img`
 `;
 
 const ChristmasBlend = () => {
-  const mainRef = createRef<HTMLDivElement>();
-  const leftRef = createRef<HTMLImageElement>();
-  const rightRef = createRef<HTMLDivElement>();
+  const mainRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLImageElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     gsap.fromTo(

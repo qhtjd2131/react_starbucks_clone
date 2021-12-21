@@ -1,5 +1,5 @@
 import {
-  createRef,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -125,8 +125,8 @@ interface Istate {
 
 const Promotion = () => {
   let elems = useRef<HTMLImageElement[]>([]);
-  let timer: ReturnType<typeof setTimeout> | null = null;
-  let timeline = gsap.timeline({
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timeline: gsap.core.Timeline = gsap.timeline({
     defaults: {
       duration: 0.5,
       ease: "power3.inOut",
@@ -134,20 +134,13 @@ const Promotion = () => {
     paused: true,
   });
 
-  const promotionRef = createRef<HTMLDivElement>();
+  const promotionRef = useRef<HTMLDivElement>(null);
 
   const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
   const [userDetected, setUserDetected] = useState<boolean>(false);
   const [isSliding, setIsSliding] = useState<boolean>(false);
   const [playState, setPlayState] = useState<boolean>(false);
   const { isPromotionOpen } = usePromotionContext();
-
-  const activateTimer = () => {
-    //타이머
-    timer = setTimeout(() => {
-      stepForward();
-    }, 2000);
-  };
 
   const calculateIndexs: IcalculateIndexs = (index: number) => {
     //인덱스계산
@@ -162,66 +155,69 @@ const Promotion = () => {
     setIsSliding(false);
   };
 
-  const flowUp = (
-    onComplete: IcalculateIndexs,
-    direction: "left" | "right" = "right",
-    repeat: number = 1
-  ) => {
-    setIsSliding(true);
+  const flowUp = useCallback(
+    (
+      onComplete: IcalculateIndexs,
+      direction: "left" | "right" = "right",
+      repeat: number = 1
+    ) => {
+      setIsSliding(true);
 
-    let number_d: number = -100 * repeat;
+      let number_d: number = -100 * repeat;
 
-    if (direction === "left") {
-      number_d = 100 * repeat;
-    }
-    const d: string = number_d + "%";
+      if (direction === "left") {
+        number_d = 100 * repeat;
+      }
+      const d: string = number_d + "%";
 
-    //시간에 따라 자동적으로 넘길때
-    timeline
-      .to(elems.current[0], {
-        x: d,
-        opacity: 0.5,
-      })
-      .to(
-        elems.current[1],
-        {
+      //시간에 따라 자동적으로 넘길때
+      timeline
+        .to(elems.current[0], {
           x: d,
           opacity: 0.5,
-        },
-        "-=0.5"
-      )
-      .to(
-        elems.current[2],
-        {
-          x: d,
-          opacity: 0.5,
-        },
-        "-=0.5"
-      )
-      .to(
-        elems.current[3],
-        {
-          x: d,
-          opacity: 0.5,
-        },
-        "-=0.5"
-      )
-      .to(
-        elems.current[4],
-        {
-          x: d,
-          opacity: 0.5,
-          onComplete,
-        },
-        "-=0.5"
-      )
-      .play();
-  };
+        })
+        .to(
+          elems.current[1],
+          {
+            x: d,
+            opacity: 0.5,
+          },
+          "-=0.5"
+        )
+        .to(
+          elems.current[2],
+          {
+            x: d,
+            opacity: 0.5,
+          },
+          "-=0.5"
+        )
+        .to(
+          elems.current[3],
+          {
+            x: d,
+            opacity: 0.5,
+          },
+          "-=0.5"
+        )
+        .to(
+          elems.current[4],
+          {
+            x: d,
+            opacity: 0.5,
+            onComplete,
+          },
+          "-=0.5"
+        )
+        .play();
+    },
+    [timeline]
+  );
 
   const handleChange = (index: number) => {
     if (!isSliding) {
       if (index !== state.current) {
-        clearTimeout(timer!);
+        clearTimeout(timer.current!);
         setUserDetected(true);
         const result: number = state.current - index;
         if (result < 0) {
@@ -237,7 +233,7 @@ const Promotion = () => {
 
   const handleRight = () => {
     if (!isSliding) {
-      clearTimeout(timer!);
+      clearTimeout(timer.current!);
       setUserDetected(true);
       flowUp(() => calculateIndexs(state.next));
     }
@@ -246,20 +242,20 @@ const Promotion = () => {
   const handleLeft = () => {
     if (!isSliding) {
       setIsSliding(true);
-      clearTimeout(timer!);
+      clearTimeout(timer.current!);
       setUserDetected(true);
       flowUp(() => calculateIndexs(state.prev), "left");
     }
   };
 
-  const stepForward = () => {
+  const stepForward = useCallback(() => {
     setUserDetected(false);
     flowUp(() => calculateIndexs(state.next));
-  };
+  }, [state, flowUp]);
 
   const handlePlay = () => {
     if (timer) {
-      clearTimeout(timer);
+      clearTimeout(timer.current!);
     }
     if (playState) {
       pauseSlide();
@@ -299,6 +295,13 @@ const Promotion = () => {
     }
   }, [isPromotionOpen]);
 
+  const activateTimer = useCallback(() => {
+    //타이머
+    timer.current = setTimeout(() => {
+      stepForward();
+    }, 2000);
+  }, [stepForward]);
+
   useLayoutEffect(() => {
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
@@ -323,9 +326,9 @@ const Promotion = () => {
     }
 
     return () => {
-      clearTimeout(timer!);
+      clearTimeout(timer.current!);
     };
-  }, [state, playState]);
+  }, [state, playState, userDetected, activateTimer]);
 
   return (
     <PromotionContainer ref={promotionRef}>

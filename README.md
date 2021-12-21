@@ -1,25 +1,23 @@
 # React StarBucks Clone
 ## 소개
 
-**현재 진행중인 프로젝트 입니다.**
-
-
-```
-**2020/12/02, 프로젝트 제작 완료**
-   - main page에서는 한국 인기동영상 리스트를 보여줍니다.
-   - 왼쪽 사이드바는 동작하지 않습니다.
+*~~현재 진행중인 프로젝트 입니다.~~*
 
 ```
+**2020/12/21, 1.0v 프로젝트 완료**
+   - Starbucks main page 구현
+   - scroll에 따른 animation 구현
 
-- Window 환경에서 create-react-app 을 사용하여 Youtube 메인, 검색결과, 동영상 시청 페이지를 클론코딩했습니다.
-- Chrome 을 기준으로 개발했기 때문에, 다른 브라우저와 호환이 되지 않을 수 도 있습니다.
+```
 
-
-
+- Window 환경에서 create-react-app 을 사용하여 STARBUCKS 메인 페이지를 클론코딩했습니다.
+- Chrome 을 기준으로 개발되었습니다. 다른 브라우저와 호환이 되지 않을 수 도 있습니다.
+- 본 프로젝트는 react 환경에서 animation 구현과 이에 관련된 gsap 라이브러리 학습을 위해 진행되었습니다.
+- STARBUCKS Main Page의 디자인만 구현되어 있습니다. 특정 링크나, 검색기능은 동작하지 않습니다!
 <br>
 
 StarBucks : https://www.starbucks.co.kr/index.do <br>
-My StarBucks Clone : 
+My StarBucks Clone : https://qhtjd2131.github.io/react_starbucks_clone<br>
 
 
 ### 시작하기	
@@ -145,7 +143,10 @@ Timeout type 은 console로 출력하면 number type으로 나오는듯이 자�
 animation 을 위해 사용한 useEffect() 에서 발생한 missing dependency warning.
 의도적으로 의존성배열에 빈배열을 넣었지만, warning이 발생하는것을 없앨 수 있을까?
 
--> useEffect를 componentDidMount() 처럼 사용하려고하면 안된다? 
+해결책 : createRef를 useRef로 변경.
+이유 : createRef는 불변성을 보장하지 못하지만, useRef는 React가 불변성을 보장해준다. 자세하게는 createRef는 컴포넌트가 리랜더링 될 때, null을 참조하였다가 다시 해당 컴포넌트를 참조한다. 하지만 useRef는 리랜더링 되더라도 같은 컴포넌트나 값을 참조하는것이 보장된다. 이러한 특성 때문에 createRef 보다 useRef가 컴포넌트 뿐만 아니라 특정 값을 유지하는데에도 사용된다.
+
+-> useEffect를 componentDidMount() 처럼 사용하려고하면 안된다?  effect와 lifeCycle을 별개로 생각해야한다. 흉내내면안된다.
 ---
 
 ## 이번 프로젝트를 하면서..
