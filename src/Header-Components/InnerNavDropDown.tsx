@@ -7,7 +7,9 @@ const InnerNavDropDownComponent = styled.div<{
 }>`
   cursor: default;
   position: absolute;
-  width: 100%;
+  width: 100vw;
+  transform: translateX(calc((-100vw + 1200px) / 2));
+
   overflow: hidden;
   background-color: #2c2a29;
   box-sizing: border-box;
@@ -15,9 +17,10 @@ const InnerNavDropDownComponent = styled.div<{
   top: 100%;
   left: 0;
   visibility: hidden;
+
   max-height: 0px;
-  transition: visibility 0s, max-height 2s ease-out;
-  z-index : 5;
+  transition: visibility 0s, max-height 1.8s ease-out;
+  z-index: 999;
 
   ${(props) =>
     props.selectedInnerNavItem === props.innerNavItem &&
@@ -32,6 +35,7 @@ const InnerNavDropDownWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
   padding-right: 80px;
+  padding-left: 80px;
   box-sizing: border-box;
 `;
 
@@ -134,8 +138,8 @@ const InnerNavDropDown = ({
   innerNavItem,
   bottom,
 }: INavDropdownProps) => {
-//   console.log("selected :", selectedInnerNavItem);
-//   console.log("navitem:", innerNavItem);
+  //   console.log("selected :", selectedInnerNavItem);
+  //   console.log("navitem:", innerNavItem);
   return (
     <InnerNavDropDownComponent
       selectedInnerNavItem={selectedInnerNavItem}

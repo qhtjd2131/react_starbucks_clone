@@ -67,6 +67,8 @@ npm run start
 ### Preview
 
 // 메뉴 드롭다운, 검색버튼, 메인 등 검색버튼이 적용된 preview 보여주기
+
+// ghpages 로 접속시 이미지로딩안되는현상 수정ㅈ필요
 ---
 
 ### Components Structure

@@ -9,7 +9,8 @@ const InnerNavComponent = styled.nav`
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  position: relative;
+
+
 `;
 const InnerNavItemWrapper = styled.ul`
   display: flex;

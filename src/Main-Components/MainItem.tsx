@@ -9,7 +9,6 @@ const MainItemWrapper = styled.div`
   height: 700px;
   box-sizing: border-box;
   padding: 20px;
-  margin-top: 120px;
   display: flex;
   flex-direction: column;
 `;

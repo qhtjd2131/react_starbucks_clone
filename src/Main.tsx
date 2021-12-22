@@ -13,14 +13,15 @@ import FindStore from "./Main-Components/FindStore";
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content : center;
-  align-items : center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
   width: 100%;
 `;
 
 export interface IpromotionContext {
-    isPromotionOpen : boolean,
-    setIsPromotionOpen : (c:boolean) => void;
+  isPromotionOpen: boolean;
+  setIsPromotionOpen: (c: boolean) => void;
 }
 export const promotionContext = createContext({} as IpromotionContext);
 export const usePromotionContext = () => useContext(promotionContext);
@@ -42,9 +43,7 @@ const Main = () => {
       <PickYourFavorite />
       <ReserveMagazine />
       <FindStore />
-      
     </MainWrapper>
-
   );
 };
 
