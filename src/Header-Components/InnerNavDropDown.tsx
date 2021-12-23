@@ -75,6 +75,8 @@ const InnerNavDropDownItemSubTitle = styled.label`
 
 const InnerNavDropDownBottom = styled.div`
   background-color: #1d1d1d;
+  padding-left: 80px;
+
 `;
 
 const InnerNavDropDownBottomWrapper = styled.div`
@@ -85,6 +87,7 @@ const InnerNavDropDownBottomWrapper = styled.div`
 `;
 
 const InnerNavDropDownBottomItem = styled.div`
+
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -103,6 +106,7 @@ const InnerNavDropDownBottomItemTitle = styled.label`
 const InnerNavDropDownBottomItemSubTitle = styled.label`
   color: #64a716;
 `;
+
 //interface
 interface INavDropdownProps {
   dropdown: Idropdown[];

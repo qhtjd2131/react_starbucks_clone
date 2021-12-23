@@ -14,6 +14,7 @@ _~~현재 진행중인 프로젝트 입니다.~~_
    - HeaderBar Component 길이 제한으로 인해 메뉴 Dropdown 스타일링이 깨지는 현상 수정
 **2020/12/23, 1.02v 수정**
    - 배포 시 이미지 로딩 안되는 현상 수정
+   - 공지사항에 마우스 올릴 시 생성되는 underline이 가려지는 현상 수정
 ```
 
 - Window 환경에서 create-react-app 을 사용하여 STARBUCKS 메인 페이지를 클론코딩했습니다.
@@ -27,13 +28,9 @@ _~~현재 진행중인 프로젝트 입니다.~~_
 
 ![image](https://user-images.githubusercontent.com/34260967/147048695-5b04dd2b-2b69-466e-92ab-db83d38adf5f.png)
 
-
 StarBucks : https://www.starbucks.co.kr/index.do <br>(2021년도 크리스마스 버전이 아닐 수도 있습니다.)<br>
 
 My StarBucks Clone : https://qhtjd2131.github.io/react_starbucks_clone<br>
-
-
-// ghpages 로 접속시 이미지로딩안되는현상 수정ㅈ필요 => image import로 해결가능할거같음
 
 ---
 
@@ -67,6 +64,9 @@ npm run start
 - React TypeScript CheatSheet : https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example<br>
 
 **5. React Library**
+
+- **typescript** : typescript 사용
+  <br>
 - **gsap** : 효율적인 Animation 구현을 위한 라이브러리.(실제 startbucks에서 사용)
   https://greensock.com/docs/
   <br>
@@ -77,15 +77,16 @@ npm run start
   https://www.npmjs.com/package/gh-pages
   <br>
 
-
 ---
 
 ### Components Structure
 
-![bbb drawio](https://user-images.githubusercontent.com/34260967/143530854-28281361-5657-4324-8de8-052ba67ddfb5.png)
+![starkbucks1](https://user-images.githubusercontent.com/34260967/147243621-e3ff2829-aae4-4a8b-9132-300912d91b46.jpg)
 
-![temp drawio](https://user-images.githubusercontent.com/34260967/143534852-296c94f5-3b6f-4561-b51d-ba20a0a0f26f.png)
+![starbucks2](https://user-images.githubusercontent.com/34260967/147243946-663f8c55-6bdd-437b-8d91-d86021806580.jpg)
+<br>
 
+- Header은 fixed 요소임.
 
 ---
 
@@ -96,26 +97,76 @@ npm run start
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "axios": "^0.24.0",
+    "@types/gsap": "^3.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.11",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
     "gh-pages": "^3.2.3",
+    "gsap": "^3.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "react-youtube": "^7.13.1",
-    "sass": "^1.43.4",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.5.2",
     "web-vitals": "^1.0.1"
-  }
+  },
 ```
-
----
 
 ## 동작 원리 및 구현 내용
 
-### 1. 버튼 부가 설명 컴포넌트
+### 1. Animation
 
-### 2. scrollTrigger
+(video)
+https://user-images.githubusercontent.com/34260967/147247476-3b826781-64b3-43ed-aef1-a084242f8644.mp4
+<br>
+(gif)
+![ezgif com-gif-maker (16)](https://user-images.githubusercontent.com/34260967/147247731-d01ffa01-f039-4778-8deb-49cc4eafcac0.gif)
+<br>
+<br>
+**Animation 1 (라이브러리 사용 x)**
+![ezgif com-gif-maker (17)](https://user-images.githubusercontent.com/34260967/147247933-d1cfcf14-eb5a-4aea-b23b-1d239eb563b0.gif)
+
+해당 애니메이션은 학습목적으로 의도적으로 라이브러리 없이 css의 스타일로만 구현하였다. css의 `transition-delay` 속성을 활용하여 0.5초 간격으로 `<Image>` 컴포넌트를 랜더링한다.
+
+만약 이렇게만 구현한다면, 의도한 animation이 나오지 않을것이다. 그 이유는 `transition-delay` 속성은 `transition`이 되는 시점이라는 timeline이 필요하다. 원하는 시점에서 `transition`이 되지 않는다면, `delay`또한 작동하지 않는다.
+
+이 애니메이션은 웹사이트 접속 시 가장 처음 실행되는 Animation 이다. 따라서 `useState` hook을 사용하여 웹페이지가 처음 렌더링 될때, `state`를 바꾸어 `transition`을 일으켜 주었다.
+(style 속성이 `state`가 바뀜을 인지하기 위해선 `styled-component`를 사용해야한다.)
+
+```javascript
+const Image = styled.img<{
+   isRender: boolean;
+}>`
+   opacity : 0;
+
+   ${(props) =>
+    props.isRender &&
+    css`
+      opacity: 1;
+    `};
+`;
+
+const [isRender, setIsRender] = useState<boolean>(false);
+  useEffect(() => {
+    setIsRender(true);
+  }, []);
+```
+
+### 2. Notice 무한 반복
+
+![ezgif com-gif-maker (19)](https://user-images.githubusercontent.com/34260967/147250468-ad8c7e56-4611-426f-ae83-97a5225c7aaf.gif)
+
+### 3. Promotion
+
+![ezgif com-gif-maker (18)](https://user-images.githubusercontent.com/34260967/147250297-1618d1f1-c7d5-449e-b591-ef0b65aaebee.gif)
+
+## 겪었던 어려움
+
+### 1. scrollTrigger
 
 scrollTrigger 기능이 동작하지않는 문제를 해결.
 구글링 중 동일한 문제를 겪었지만, 해결책이 제시되지 않은 게시물 발견.

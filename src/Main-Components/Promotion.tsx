@@ -301,7 +301,7 @@ const Promotion = () => {
       stepForward();
     }, 2000);
   }, [stepForward]);
-
+  
   useLayoutEffect(() => {
     const image1 = !!elems.current[0] && elems.current[0];
     const image2 = !!elems.current[1] && elems.current[1];
