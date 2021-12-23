@@ -135,7 +135,7 @@ https://user-images.githubusercontent.com/34260967/147247476-3b826781-64b3-43ed-
 만약 이렇게만 구현한다면, 의도한 animation이 나오지 않을것이다. 그 이유는 `transition-delay` 속성은 `transition`이 되는 시점이라는 timeline이 필요하다. 원하는 시점에서 `transition`이 되지 않는다면, `delay`또한 작동하지 않는다.
 
 이 애니메이션은 웹사이트 접속 시 가장 처음 실행되는 Animation 이다. 따라서 `useState` hook을 사용하여 웹페이지가 처음 렌더링 될때, `state`를 바꾸어 `transition`을 일으켜 주었다.
-(style 속성이 `state`가 바뀜을 인지하기 위해선 `styled-component`를 사용해야한다.)
+(style 속성이 `state`가 바뀜을 인지하기 위해선 `styled-component`라이브러리를 사용해야한다.)
 
 ```javascript
 const Image = styled.img<{
@@ -158,11 +158,64 @@ const [isRender, setIsRender] = useState<boolean>(false);
 
 ### 2. Notice 무한 반복
 
+
 ![ezgif com-gif-maker (19)](https://user-images.githubusercontent.com/34260967/147250468-ad8c7e56-4611-426f-ae83-97a5225c7aaf.gif)
+<br>
+
+해당 이펙트는 아이템 컴포넌트 모두를 `position : absolute`속성을 이용하여 아래에 위치시키고, 차례가되면 `top`속성을 변화시켰다.
+<br>
+
+![image](https://user-images.githubusercontent.com/34260967/147279652-72dbd5cc-6136-4f9f-8bf3-807218a21dab.png)
+<br>
+
+보여지고 있는 현재의 아이템을 그다음 아이템이 올라오면서 가려야한다. 이 때, 원래 올라와 있던 아이템은 다시 내려가야하는데, 동시에 내려가게되면 의도와 다르게 가려지는 이펙트가 발생하지 않는다. 그래서 현재의 아이템은 바로 다음이 아닌 2번째 이후의 아이템이 올라올 때, 내려가게 구현하였다. (즉, 위에 위치하는 아이템의 갯수는 2개)
+<br>
 
 ### 3. Promotion
 
+
 ![ezgif com-gif-maker (18)](https://user-images.githubusercontent.com/34260967/147250297-1618d1f1-c7d5-449e-b591-ef0b65aaebee.gif)
+
+`<Promotion>`은 3개의 `Promotion Item`을 가진다. 이 `Items`이 슬라이딩되면서 focusing 받는 효과를 구현하기위해 나는 아래와 같은 구성으로 만들었다.
+
+![starbucks_promotion](https://user-images.githubusercontent.com/34260967/147282667-60595326-ea8d-41b5-8de1-84b5e7cbfb76.jpg)
+
+그리고 현재 화면에 보여지는 인덱스를 가지는 `state` 와 그 다음 인덱스를 계산하는 `calculateIndex()` 를 만들었다.
+
+```javascript
+const [state, setState] = useState<Istate>({ prev: 2, current: 0, next: 1 });
+
+const calculateIndexs: IcalculateIndexs = (index: number) => {
+    //인덱스계산
+
+    if (index === data.promotionData.length - 1) {
+      setState({ prev: 1, current: index, next: 0 });
+    } else if (index === 0) {
+      setState({ prev: index + 2, current: index, next: index + 1 });
+    } else {
+      setState({ prev: index - 1, current: index, next: index + 1 });
+    }
+    setIsSliding(false);
+  };
+
+```
+
+이 다음 sliding animation을 구현하기위해 **gsap** 을 활용하였다. gsap은 기본적으로 컴포넌트의 ref를 참조하여 사용한다. 따라서 `useRef`를 사용하여 애니메이션이 필요한 모든 컴포넌트의 ref를 가져와야한다.
+
+**gsap**을 이용하여 5개의 아이템을 모두 원하는 방향으로 x를 100% 만큼 옮기면 sliding animation이 구현된다. 
+
+![starbucks_promotion (4)](https://user-images.githubusercontent.com/34260967/147284731-72884064-2cf2-48f2-9b0d-ceabb0fbc81c.jpg)
+<br>
+
+![starbucks_promotion (3)](https://user-images.githubusercontent.com/34260967/147284667-0ae60770-8333-4d51-a6d4-fcc473dc4e1c.jpg)
+<br>
+
+이제 컴포넌트는 이러한 상태가 되는데, 이 때 `calculateIndex()`를 이용하여 계산된 `state`에 따라, 컴포넌트를 리렌더링했다.
+<br>
+![starbucks_promotion (6)](https://user-images.githubusercontent.com/34260967/147284973-7c940e99-d1e6-4388-9e20-26a73249ad94.jpg)
+
+위의 동작은 `setTimeOut`을 사용하여 특정 시간마다 반복하거나, 버튼 클릭시 실행하게 된다면 의도하는 효과를 구현 할 수 있게된다!
+
 
 ## 겪었던 어려움
 
