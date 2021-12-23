@@ -2,6 +2,8 @@ import { useRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import MoreInfoButton from "./MoreInfoButton";
 import gsap from "gsap";
+import rm_title_src from "../images/reserve_text_pc.png";
+import rm_visual_src from "../images/reserve_visual_pc.png";
 
 const ReserveMagazineBox = styled.div`
   width: 100%;
@@ -56,7 +58,7 @@ const ReserveMagazine = () => {
   const visualRef = useRef<HTMLImageElement>(null);
   // const visualRef = createRef<HTMLImageElement>();
 
-  useLayoutEffect(() => {  
+  useLayoutEffect(() => {
     gsap.fromTo(
       visualRef.current,
       {
@@ -78,16 +80,12 @@ const ReserveMagazine = () => {
   return (
     <ReserveMagazineBox>
       <ReserveMagazineTitle>
-        <TitleImage src="/images/reserve_text_pc.png" alt="" />
+        <TitleImage src={rm_title_src} alt="" />
       </ReserveMagazineTitle>
       <MoreInfoButtonWrapper>
         <MoreInfoButton color="black" />
       </MoreInfoButtonWrapper>
-      <ReserveMagazineVisual
-        src="/images/reserve_visual_pc.png"
-        alt=""
-        ref={visualRef}
-      />
+      <ReserveMagazineVisual src={rm_visual_src} alt="" ref={visualRef} />
     </ReserveMagazineBox>
   );
 };

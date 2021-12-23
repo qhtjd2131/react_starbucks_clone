@@ -2,6 +2,13 @@ import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import gsap from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import fs_text1_src from "../images/store_txt01.png";
+import fs_text2_src from "../images/store_txt02.png";
+import fs_deco1_src from "../images/store_exp_img03.png";
+import fs_deco2_src from "../images/store_exp_img04.png";
+import fs_img1_src from "../images/store_exp_img01.png";
+import fs_img2_src from "../images/store_exp_img02.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const FindStoreBox = styled.div`
@@ -153,22 +160,14 @@ const FindStore = () => {
     <FindStoreBox>
       <InnerWrapper>
         <ImageWrapper ref={imageRef}>
-          <Image1 src="/images/store_exp_img01.png" alt="" />
-          <Image2 src="/images/store_exp_img02.png" alt="" />
+          <Image1 src={fs_img1_src} alt="" />
+          <Image2 src={fs_img2_src} alt="" />
         </ImageWrapper>
-        <DecoImage1
-          src="/images/store_exp_img03.png"
-          alt=""
-          ref={decoImage1Ref}
-        />
-        <DecoImage2
-          src="/images/store_exp_img04.png"
-          alt=""
-          ref={decoImage2Ref}
-        />
+        <DecoImage1 src={fs_deco1_src} alt="" ref={decoImage1Ref} />
+        <DecoImage2 src={fs_deco2_src} alt="" ref={decoImage2Ref} />
         <TextWrapper>
-          <Text1 src="/images/store_txt01.png" alt="" ref={Text1Ref} />
-          <Text2 src="images/store_txt02.png" alt="" ref={Text2Ref} />
+          <Text1 src={fs_text1_src} alt="" ref={Text1Ref} />
+          <Text2 src={fs_text2_src} alt="" ref={Text2Ref} />
           <FindButton ref={buttonRef}>매장 찾기</FindButton>
         </TextWrapper>
       </InnerWrapper>

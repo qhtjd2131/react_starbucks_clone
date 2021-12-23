@@ -12,7 +12,6 @@ const HeaderBox = styled.div`
   top: 0;
   left: 0;
   z-index: 998;
-
   display: flex;
   justify-content: center;
 `;

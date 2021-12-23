@@ -5,12 +5,15 @@
 _~~현재 진행중인 프로젝트 입니다.~~_
 
 ```
-**2020/12/21, 1.0v 프로젝트 완료**
+**2020/12/21, 1.00v 프로젝트 완료**
    - Starbucks main page 구현
    - Header navigation animation 구현 (라이브러리 사용 x)
    - Main의 첫번째 컴포넌트 animation 구현(라이브러리 사용 x)
    - scroll에 따른 animation 구현 (라이브러리 사용 o)
-
+**2020/12/22, 1.01v 수정**
+   - HeaderBar Component 길이 제한으로 인해 메뉴 Dropdown 스타일링이 깨지는 현상 수정
+**2020/12/23, 1.02v 수정**
+   - 배포 시 이미지 로딩 안되는 현상 수정
 ```
 
 - Window 환경에서 create-react-app 을 사용하여 STARBUCKS 메인 페이지를 클론코딩했습니다.
@@ -20,8 +23,19 @@ _~~현재 진행중인 프로젝트 입니다.~~_
 - STARBUCKS Main Page의 디자인만 구현되어 있습니다. 특정 링크나, 검색기능은 동작하지 않습니다!
   <br>
 
-StarBucks : https://www.starbucks.co.kr/index.do <br>
+### Preview
+
+![image](https://user-images.githubusercontent.com/34260967/147048695-5b04dd2b-2b69-466e-92ab-db83d38adf5f.png)
+
+
+StarBucks : https://www.starbucks.co.kr/index.do <br>(2021년도 크리스마스 버전이 아닐 수도 있습니다.)<br>
+
 My StarBucks Clone : https://qhtjd2131.github.io/react_starbucks_clone<br>
+
+
+// ghpages 로 접속시 이미지로딩안되는현상 수정ㅈ필요 => image import로 해결가능할거같음
+
+---
 
 ### 시작하기
 
@@ -50,8 +64,9 @@ npm run start
 **4. TypeScript**
 
 - TypeScript 공식문서 : https://www.typescriptlang.org/ko/docs/handbook/react.html
-- React TypeScript CheatSheet : https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example
-  **5. React Library**
+- React TypeScript CheatSheet : https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example<br>
+
+**5. React Library**
 - **gsap** : 효율적인 Animation 구현을 위한 라이브러리.(실제 startbucks에서 사용)
   https://greensock.com/docs/
   <br>
@@ -62,13 +77,7 @@ npm run start
   https://www.npmjs.com/package/gh-pages
   <br>
 
----
 
-### Preview
-
-// 메뉴 드롭다운, 검색버튼, 메인 등 검색버튼이 적용된 preview 보여주기
-
-// ghpages 로 접속시 이미지로딩안되는현상 수정ㅈ필요
 ---
 
 ### Components Structure

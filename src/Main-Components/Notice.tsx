@@ -43,7 +43,7 @@ const LeftItems = styled.div`
   box-sizing: border-box;
   margin-right: 160px;
   position: relative;
-  height: 24px;
+  height: 26px;
   overflow: hidden;
 `;
 
@@ -54,21 +54,20 @@ const LItem = styled.div<{
   width: 100%;
   font-size: 18px;
   font-weight: 300;
-
   overflow: hidden;
   padding: 0px 5px;
-
   display: flex;
   align-items: center;
-
   box-sizing: border-box;
-  transition: top 1s;
+  transition: top 0.5s;
   opacity: 0;
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 0;
   height: 100%;
   background-color: black;
+  
+
   ${(props) =>
     props.index === props.noticeIndex &&
     css`
@@ -89,6 +88,14 @@ const LeftItemLabel = styled.label`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor : pointer;
+
+  padding-bottom : 2px;
+
+
+  &:hover{
+    text-decoration : underline;
+  }
 `;
 
 const LeftButton = styled.button`
