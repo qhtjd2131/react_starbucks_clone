@@ -127,13 +127,9 @@ npm run start
 
 ### 1. Animation
 
-video link<br>
-https://user-images.githubusercontent.com/34260967/147247476-3b826781-64b3-43ed-aef1-a084242f8644.mp4
-<br><br>
-![ezgif com-gif-maker (16)](https://user-images.githubusercontent.com/34260967/147247731-d01ffa01-f039-4778-8deb-49cc4eafcac0.gif)
+
 <br>
-<br>
-**Animation 1 (라이브러리 사용 x)**
+**Animation 1 (라이브러리 사용 x)**<br>
 ![ezgif com-gif-maker (17)](https://user-images.githubusercontent.com/34260967/147247933-d1cfcf14-eb5a-4aea-b23b-1d239eb563b0.gif)
 
 해당 애니메이션은 학습목적으로 의도적으로 라이브러리 없이 css의 스타일로만 구현하였다. css의 `transition-delay` 속성을 활용하여 0.5초 간격으로 `<Image>` 컴포넌트를 랜더링한다.
@@ -161,6 +157,18 @@ const [isRender, setIsRender] = useState<boolean>(false);
     setIsRender(true);
   }, []);
 ```
+
+**Animation 2 : ScrollTrigger Animation (라이브러리 사용 O)**<br>
+
+video link<br>
+https://user-images.githubusercontent.com/34260967/147247476-3b826781-64b3-43ed-aef1-a084242f8644.mp4
+<br><br>
+![ezgif com-gif-maker (16)](https://user-images.githubusercontent.com/34260967/147247731-d01ffa01-f039-4778-8deb-49cc4eafcac0.gif)
+<br>
+
+해당 애니메이션은 **GSAP의 ScrollTrigger Plugin**을 사용하였다. ScrollTrigger을 사용하면 해당 컴포넌트를 참조하여 컴포넌트의 scroll 시작과 끝위치를 알 수 있다. 컴포넌트의 시작지점에 scroll이 도착하면 지정된 animation 을 실행시킬 수 있다.<br>https://greensock.com/scrolltrigger/
+
+
 
 ### 2. Notice 무한 반복
 
@@ -292,7 +300,7 @@ ReturnType<typeof setTimeout> 을 이용하여 타입을 지정할 수 있다. �
 
 ### 2. useEffect() : missing dependency warning
 
-animation 을 위해 사용한 `useEffect()` 에서 발생한 missing dependency warning.
+animation 을 위해 사용한 `useEffect()` 에서 발생한 `ref`의 missing dependency warning.
 
 gsap animation 은 컴포넌트의 `ref`를 직접 참조하여 노드를 컨트롤한다. 이 때 `useEffect()`에 필수적으로 `ref`가 들어가지만, 의도적으로 의존성배열에 빈배열을 넣었다. 이 때, warning이 발생하는 근본적인 원인을 없앨 수 있을까 생각하고 구글링을 하여 해결책을 찾았다.
 
