@@ -7,9 +7,7 @@ const InnerNavDropDownComponent = styled.div<{
 }>`
   cursor: default;
   position: absolute;
-  width: 100vw;
-  transform: translateX(calc((-100vw + 1200px) / 2));
-
+  width: 100%;
   overflow: hidden;
   background-color: #2c2a29;
   box-sizing: border-box;
@@ -28,6 +26,12 @@ const InnerNavDropDownComponent = styled.div<{
       visibility: visible;
       max-height: 1500px;
     `}
+
+  @media only screen and (min-width:1200px) {
+    width: 100vw;
+
+    transform: translateX(calc((-100vw - 40px + 1200px) / 2));
+  }
 `;
 
 const InnerNavDropDownWrapper = styled.div`
@@ -76,7 +80,6 @@ const InnerNavDropDownItemSubTitle = styled.label`
 const InnerNavDropDownBottom = styled.div`
   background-color: #1d1d1d;
   padding-left: 80px;
-
 `;
 
 const InnerNavDropDownBottomWrapper = styled.div`
@@ -87,7 +90,6 @@ const InnerNavDropDownBottomWrapper = styled.div`
 `;
 
 const InnerNavDropDownBottomItem = styled.div`
-
   display: flex;
   flex-direction: column;
   font-size: 16px;
