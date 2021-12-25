@@ -173,7 +173,6 @@ const [isRender, setIsRender] = useState<boolean>(false);
 
 ### 3. Promotion
 
-
 ![ezgif com-gif-maker (18)](https://user-images.githubusercontent.com/34260967/147250297-1618d1f1-c7d5-449e-b591-ef0b65aaebee.gif)
 
 `<Promotion>`은 3개의 `Promotion Item`을 가진다. 이 `Items`이 슬라이딩되면서 focusing 받는 효과를 구현하기위해 나는 아래와 같은 구성으로 만들었다.
@@ -221,25 +220,23 @@ const calculateIndexs: IcalculateIndexs = (index: number) => {
 
 ### 1. scrollTrigger
 
-scrollTrigger 기능이 동작하지않는 문제를 해결.
-구글링 중 동일한 문제를 겪었지만, 해결책이 제시되지 않은 게시물 발견.
-https://greensock.com/forums/topic/24456-markers-and-scrolltrigger-not-working/
+scrollTrigger의 기능이 동작하지 않는 문제가 있었고, 이를 대소문자 변경으로 간단하게 해결하였다.(실제로는 한시간정도 걸렸다..) 해결 내용은 다음과 같다.
 
-회원가입하여 해결책 제시!
+- ScrollTrigger : ScrollTrigger 기능을 담당하는 gsap 플러그인
+- scrollTrigger : scrollTrigger 기능의 설정을 담당하는 변수
 
-setTimeout method 는 두종류가 있다.
-window.setTimeout() : 리턴타입이 number 이다.
-browser 기반 javascript 에서만 동작한다. 만약에 window 객체가 정의 되지 않는다면, 동작하지 않는다. 예를들어 server side rendering을 할 때 window 객체가 정의 되지 않으므로 동작하지 않는다.
-(https://developer.mozilla.org/ko/docs/Web/API/setTimeout)
+변수를 써야할 때, 플러그인을 사용하였기 때문에 기능이 동작하지 않았다.
 
-NodeJS.setTimeout() : 리턴타입이 NodeJS.Timeout 이다.
-ReturnType<typeof setTimeout> 을 이용하여 타입을 지정할 수 있다. 이렇게 한다면 플랫폼과 상관없이 기능을 동작시킬 수있다. 따라서 이 방법을 추천한다.
-(https://nodejs.org/ko/docs/guides/timers-in-node/#node-js-timers)
+gsap 포럼에 검색을 하던 중 동일한 문제를 겪었지만, 해결책이 제시되지 않은 게시물 발견하였다. 그래서 회원가입을 하고, 해결법을 공유하였다.
+ https://greensock.com/forums/topic/24456-markers-and-scrolltrigger-not-working/
 
-TypeScript: TS2769
-let timer: ReturnType<typeof setTimeout> | null = null;
-clearTimeout(timer) // error ts:2769
 
+
+### 2. TypeScript (TS2769) : setTimeout()의 타입
+
+
+ERROR
+```
 이 호출과 일치하는 오버로드가 없습니다.
 오버로드 1/2('(timeoutId: Timeout): void')에서 다음 오류가 발생했습니다.
 'Timeout | null' 형식의 인수는 'Timeout' 형식의 매개 변수에 할당될 수 없습니다.
@@ -248,20 +245,53 @@ clearTimeout(timer) // error ts:2769
 'Timeout | null' 형식의 인수는 'number | undefined' 형식의 매개 변수에 할당될 수 없습니다.
 'null' 형식은 'number | undefined' 형식에 할당할 수 없습니다.
 
-해당 오류는 인수의 필요타입과 실제타입이 달라서 발생하는 문제이다.
-clearTimeout의 인수는 number | undefined 타입이어야 한다.
-하지만 NodeJS.setTimeout method는 'Timeout | null' type을 가진다.
-Timeout type 은 console로 출력하면 number type으로 나오는듯이 자동으로 변환되지만(setTimeout의 return 값의 type을 출력해보면 number 이지만, timer의 타입을 number로 지정하면 오류가 발생한다.), 초기설정값을 null로 주면서 null type이 충돌을 일으키는 것이다.
+```
 
-이 때 발생한 오류는 type error 이기 때문에 논리적인 알고리즘으로 null 값을 피하더라도 해당 오류는 계속 된다. 그래서 typescript의 non-null-assertion-operator 을 사용해야한다.
+CODE
+```
+//TypeScript: TS2769
+let timer: ReturnType<typeof setTimeout> | null = null;
+
+timer = setTimeout(() => {
+      stepForward();
+    }, 2000);
+
+clearTimeout(timer) // error ts:2769
+```
+
+**해당 오류는 `clearTimeout()`의 인수(파라미터)의 필요타입과 실제타입이 달라서 발생하는 문제이다.**
+
+`clearTimeout()`의 인수가 되는 `timer`는 `setTimeout()`의 return type이 포함되어야 하고, 이러한 `setTimeout()` 에는 두 종류가 있다.
+- **window.setTimeout()** : 리턴타입이 `number` 이다.
+browser 기반 javascript 에서만 동작한다. 만약에 window 객체가 정의 되지 않는다면, 동작하지 않는다. 예를들어 server side rendering을 할 때 window 객체가 정의 되지 않으므로 동작하지 않는다.
+(https://developer.mozilla.org/ko/docs/Web/API/setTimeout)
+<br>
+- **NodeJS.setTimeout()** : 리턴타입이 `NodeJS.Timeout` 이다.
+ReturnType<typeof setTimeout> 을 이용하여 타입을 지정할 수 있다. 이렇게 한다면 플랫폼과 상관없이 기능을 동작시킬 수있다. 따라서 이 방법을 추천한다.
+(https://nodejs.org/ko/docs/guides/timers-in-node/#node-js-timers)
+
+
+
+ `clearTimeout()`의 인수는 `number | undefined` 타입이어야 한다. 
+ `timer`는 `Timeout | null` 타입을 가진다.
+
+`NodeJS.setTimeout()`의 Timeout type 은 console로 출력하면 `number` type으로 나오는듯이 자동으로 변환되지만, 초기설정값을 null로 주면서 null type이 충돌을 일으키는 것이다.
+(`setTimeout()`의 return 값의 type을 출력해보면 `number` 이지만, timer의 타입을 `number`로 지정하면 오류가 발생한다.)
+
+이 때 발생한 오류는 type error 이기 때문에 논리적으로 null 값을 피하더라도 해당 오류는 계속 된다. 그래서 typescript의 **non-null-assertion-operator** 을 사용해야한다.
 참고 :(typescript non-null-assertion-operator) https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator
+
 이 기능은 해당하는 값이 null 이 아니고 정의되지 않은 값이라고 컴파일러에게 알려준다. 따라서 null type을 해당 경우에서 제외 시키고, 오류를 해결할 수 있다.
 
-animation 을 위해 사용한 useEffect() 에서 발생한 missing dependency warning.
-의도적으로 의존성배열에 빈배열을 넣었지만, warning이 발생하는것을 없앨 수 있을까?
 
-해결책 : createRef를 useRef로 변경.
-이유 : createRef는 불변성을 보장하지 못하지만, useRef는 React가 불변성을 보장해준다. 자세하게는 createRef는 컴포넌트가 리랜더링 될 때, null을 참조하였다가 다시 해당 컴포넌트를 참조한다. 하지만 useRef는 리랜더링 되더라도 같은 컴포넌트나 값을 참조하는것이 보장된다. 이러한 특성 때문에 createRef 보다 useRef가 컴포넌트 뿐만 아니라 특정 값을 유지하는데에도 사용된다.
+### 2. useEffect() : missing dependency warning
+
+animation 을 위해 사용한 useEffect() 에서 발생한 missing dependency warning.
+
+gsap animation 은 컴포넌트의 `ref`를 직접 참조하여 노드를 컨트롤한다. 이 때 useEffect()에 필수적으로 ref가 들어가지만, 의도적으로 의존성배열에 빈배열을 넣었다. 이 때, warning이 발생하는 근본적인 원인을 없앨 수 있을까 생각하고 구글링을 하여 해결책을 찾았다.
+
+**해결책 : `createRef`를 `useRef`로 변경.**
+**이유** : **`createRef`는 불변성을 보장하지 못하지만, `useRef`는 React가 불변성을 보장해준다.** 자세하게는 `createRef`는 컴포넌트가 리랜더링 될 때, `null`을 참조하였다가 다시 해당 컴포넌트를 참조한다. 하지만 `useRef`는 리랜더링 되더라도 같은 컴포넌트나 값을 참조하는것이 보장된다. 이러한 특성 때문에 `createRef` 보다 `useRef`가 컴포넌트 뿐만 아니라 특정 값을 유지하는데에도 사용된다.
 
 ## -> useEffect를 componentDidMount() 처럼 사용하려고하면 안된다? effect와 lifeCycle을 별개로 생각해야한다. 흉내내면안된다.
 
