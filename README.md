@@ -5,16 +5,22 @@
 _~~현재 진행중인 프로젝트 입니다.~~_
 
 ```
-**2020/12/21, 1.00v 프로젝트 완료**
+**2020/12/21, 1.00v 프로젝트 완료
    - Starbucks main page 구현
    - Header navigation animation 구현 (라이브러리 사용 x)
    - Main의 첫번째 컴포넌트 animation 구현(라이브러리 사용 x)
    - scroll에 따른 animation 구현 (라이브러리 사용 o)
-**2020/12/22, 1.01v 수정**
+
+**2020/12/22, 1.01v 수정
    - HeaderBar Component 길이 제한으로 인해 메뉴 Dropdown 스타일링이 깨지는 현상 수정
-**2020/12/23, 1.02v 수정**
+
+**2020/12/23, 1.02v 수정
    - 배포 시 이미지 로딩 안되는 현상 수정
    - 공지사항에 마우스 올릴 시 생성되는 underline이 가려지는 현상 수정
+
+**2020/12/25, 1.03v 수정
+  - HeaderBar의 InnerNavDropdwon 컴포넌트 1200px 미만일때 스타일 깨지는 현상 수정
+
 ```
 
 - Window 환경에서 create-react-app 을 사용하여 STARBUCKS 메인 페이지를 클론코딩했습니다.
@@ -60,20 +66,20 @@ npm run start
 
 **4. TypeScript**
 
-- TypeScript 공식문서 : https://www.typescriptlang.org/ko/docs/handbook/react.html
-- React TypeScript CheatSheet : https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example<br>
+- TypeScript 공식문서 :<br> https://www.typescriptlang.org/ko/docs/handbook/react.html
+- React TypeScript CheatSheet :<br> https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example<br>
 
 **5. React Library**
 
 - **typescript** : typescript 사용
   <br>
-- **gsap** : 효율적인 Animation 구현을 위한 라이브러리.(실제 startbucks에서 사용)
+- **gsap** : 효율적인 Animation 구현을 위한 라이브러리.(실제 startbucks에서 사용)<br>
   https://greensock.com/docs/
   <br>
-- **@types/styled-components** : typescript 환경에서 styled-components 라이브러리 사용
+- **@types/styled-components** : typescript 환경에서 styled-components 라이브러리 사용<br>
   https://styled-components.com/docs/api#typescript
   <br>
-- **gh-pages** : github의 호스팅 서비스 이용하기
+- **gh-pages** : github의 호스팅 서비스 이용하기<br>
   https://www.npmjs.com/package/gh-pages
   <br>
 
@@ -116,14 +122,14 @@ npm run start
   },
 ```
 
+---
 ## 동작 원리 및 구현 내용
 
 ### 1. Animation
 
-(video)
+video link<br>
 https://user-images.githubusercontent.com/34260967/147247476-3b826781-64b3-43ed-aef1-a084242f8644.mp4
-<br>
-(gif)
+<br><br>
 ![ezgif com-gif-maker (16)](https://user-images.githubusercontent.com/34260967/147247731-d01ffa01-f039-4778-8deb-49cc4eafcac0.gif)
 <br>
 <br>
@@ -308,3 +314,7 @@ gsap animation 은 컴포넌트의 `ref`를 직접 참조하여 노드를 컨트
 ---
 
 ## 향후 계획
+- Gatsby 사용하여 블로그 제작
+- 블로그에 프로젝트 정리해보기
+
+
